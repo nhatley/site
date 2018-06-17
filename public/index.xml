@@ -2,21 +2,51 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title></title>
-    <link>/</link>
+    <link>http://www.nickhatley.com/</link>
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 08 Jan 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 07 Mar 2018 07:51:49 +0100</lastBuildDate>
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://www.nickhatley.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Home</title>
+      <link>http://www.nickhatley.com/about/</link>
+      <pubDate>Wed, 07 Mar 2018 07:51:49 +0100</pubDate>
+      
+      <guid>http://www.nickhatley.com/about/</guid>
+      <description>{{% summary %}} I am a Research Analyst at Pew Research Center focusing mostly on survey and research methodology. This is a website where I will post data analyses of different areas that are interesting to me. It is important to know that this website does not, nor will ever, represent any views of my employer and the content posted here is solely my own. {{% /summary %}}
+I&amp;rsquo;m using blogdown and hugo to build the site.</description>
+    </item>
+    
+    <item>
+      <title>Home</title>
+      <link>http://www.nickhatley.com/home/</link>
+      <pubDate>Wed, 07 Mar 2018 07:51:49 +0100</pubDate>
+      
+      <guid>http://www.nickhatley.com/home/</guid>
+      <description>{{% summary %}} I am a Research Analyst at Pew Research Center focusing mostly on survey and research methodology. This is a website where I will post data analyses of different areas that are interesting to me. It is important to know that this website does not, nor will ever, represent any views of my employer and the content posted here is solely my own. {{% /summary %}}
+I&amp;rsquo;m using blogdown and hugo to build the site.</description>
+    </item>
+    
+    <item>
+      <title>Crpyto Charts</title>
+      <link>http://www.nickhatley.com/things_that_change/crypto-charts/</link>
+      <pubDate>Sat, 03 Mar 2018 20:50:11 -0500</pubDate>
+      
+      <guid>http://www.nickhatley.com/things_that_change/crypto-charts/</guid>
+      <description>Cryptocurrency Candlestick Charts If you aren’t keen on finance or if you are new to these kinds of charts, as I was, I’ll explain them briefly:
+ Each individual bars represent a day. The low point of the bars represent the low-point for the coin that day and so forth for the high/high point. The coloring represents where the coin closed that day in respect to the prior day.</description>
+    </item>
+    
+    <item>
       <title>Theme Demo</title>
-      <link>/posts/theme-demo/</link>
+      <link>http://www.nickhatley.com/things_that_change/old/theme-demo/</link>
       <pubDate>Sun, 08 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>/posts/theme-demo/</guid>
+      <guid>http://www.nickhatley.com/things_that_change/old/theme-demo/</guid>
       <description>Style Demo h1 Heading h2 Heading h3 Heading h4 Heading h5 Heading h6 Heading This is bold text
 This is bold text
 This is italic text
@@ -29,10 +59,10 @@ $$ \sum_{n=1}^{\infty} 2^{-n} = 1 $$
     
     <item>
       <title>Hello R Markdown</title>
-      <link>/post/2015-07-23-r-rmarkdown/</link>
+      <link>http://www.nickhatley.com/things/2015-07-23-r-rmarkdown/</link>
       <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
       
-      <guid>/post/2015-07-23-r-rmarkdown/</guid>
+      <guid>http://www.nickhatley.com/things/2015-07-23-r-rmarkdown/</guid>
       <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
 You can embed an R code chunk like this:
 summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
@@ -40,30 +70,30 @@ summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
     
     <item>
       <title>Creating a New Theme</title>
-      <link>/posts/creating-a-new-theme/</link>
+      <link>http://www.nickhatley.com/things_that_change/old/creating-a-new-theme/</link>
       <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
       
-      <guid>/posts/creating-a-new-theme/</guid>
+      <guid>http://www.nickhatley.com/things_that_change/old/creating-a-new-theme/</guid>
       <description>Introduction This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&amp;rsquo;ll explain how Hugo uses templates and how you can organize your templates to create a theme. I won&amp;rsquo;t cover using CSS to style your theme.
 We&amp;rsquo;ll start with creating a new site with a very basic template.</description>
     </item>
     
     <item>
       <title>(Hu)go Template Primer</title>
-      <link>/posts/hugo-template-primer/</link>
+      <link>http://www.nickhatley.com/things_that_change/old/hugo-template-primer/</link>
       <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>/posts/hugo-template-primer/</guid>
+      <guid>http://www.nickhatley.com/things_that_change/old/hugo-template-primer/</guid>
       <description>Hugo uses the excellent go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in go templates.
 This document is a brief primer on using go templates.</description>
     </item>
     
     <item>
       <title>Getting Started with Hugo</title>
-      <link>/posts/hugoisforlovers/</link>
+      <link>http://www.nickhatley.com/things_that_change/old/hugoisforlovers/</link>
       <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>/posts/hugoisforlovers/</guid>
+      <guid>http://www.nickhatley.com/things_that_change/old/hugoisforlovers/</guid>
       <description>Step 1. Install Hugo Goto hugo releases and download the appropriate version for your os and architecture.
 Save it somewhere specific as we will be using it in the next step.
 More complete instructions are available at installing hugo
@@ -74,10 +104,10 @@ Follow the following steps:
     
     <item>
       <title>Migrate to Hugo from Jekyll</title>
-      <link>/posts/migrate-from-jekyll/</link>
+      <link>http://www.nickhatley.com/things_that_change/old/migrate-from-jekyll/</link>
       <pubDate>Mon, 10 Mar 2014 00:00:00 +0000</pubDate>
       
-      <guid>/posts/migrate-from-jekyll/</guid>
+      <guid>http://www.nickhatley.com/things_that_change/old/migrate-from-jekyll/</guid>
       <description>Move static content to static Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like
 ▾ &amp;lt;root&amp;gt;/ ▾ images/ logo.png should become
 ▾ &amp;lt;root&amp;gt;/ ▾ static/ ▾ images/ logo.png Additionally, you&amp;rsquo;ll want any files that should reside at the root (such as CNAME) to be moved to static.</description>
@@ -85,10 +115,10 @@ Follow the following steps:
     
     <item>
       <title>About Hugo</title>
-      <link>/about/</link>
+      <link>http://www.nickhatley.com/old/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/about/</guid>
+      <guid>http://www.nickhatley.com/old/about/</guid>
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.

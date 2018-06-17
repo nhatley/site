@@ -38,11 +38,11 @@ pygmentscodefencesguesssyntax = true
 [[menu.main]]
     name = "--Things--"
     weight = 1
-    url  = "/posts/"
+    url  = "/things/"
 [[menu.main]]
     name = "--Things that Change--"
     weight = 3
-    url  = "/posts/updaters/"
+    url  = "/things_that_change/"
 [[menu.main]]
     name = "About"
     weight = 0

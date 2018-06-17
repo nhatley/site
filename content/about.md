@@ -1,29 +1,15 @@
 +++
-title = "About Hugo"
-slug = "about"
+date = "2018-03-07T07:51:49+01:00"
+title = "Home"
+draft = false
+
 +++
 
-Hugo is a static site engine written in Go.
+{{% summary %}}
+I am a Research Analyst at Pew Research Center focusing mostly on survey and research methodology. This is a website where I will post data analyses of different areas that are interesting to me. It is important to know that this website does not, nor will ever, represent any views of my employer and the content posted here is solely my own.
+{{% /summary %}}
 
 
-It makes use of a variety of open source projects including:
+I'm using [blogdown](https://github.com/rstudio/blogdown) and [hugo](https://gohugo.io/) to build the site. I highly recommend the [blogdown book](https://bookdown.org/yihui/blogdown/) by Yihui Xie, Amber Thomas, and Alison Presmanes Hill. I came into this process knowing practically nothing about web design and was able to at least create a site after reading the book and a couple days of practice.
 
-* [Cobra](https://github.com/spf13/cobra)
-* [Viper](https://github.com/spf13/viper)
-* [J Walter Weatherman](https://github.com/spf13/jWalterWeatherman)
-* [Cast](https://github.com/spf13/cast)
-
-Learn more and contribute on [GitHub](https://github.com/spf13).
-
-## Setup
-
-Some fun facts about [Hugo](http://gohugo.io/):
-
-* Built in [Go](http://golang.org/)
-* Loosely inspired by [Jekyll](http://jekyllrb.com/)
-* Primarily developed by [spf13](http://spf13.com/) on the train while commuting to and from Manhattan.
-* Coded in [Vim](http://vim.org) using [spf13-vim](http://vim.spf13.com/)
-
-Have questions or suggestions? Feel free to [open an issue on GitHub](https://github.com/spf13/hugo/issues/new) or [ask me on Twitter](https://twitter.com/spf13).
-
-Thanks for reading!
+Everything is hosted on [github](https://github.com/nhatley), and the individual topics contain their own repositories if you want to pull some of the data or code for any of your own projects.
