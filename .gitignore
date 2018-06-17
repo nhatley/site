@@ -3,10 +3,11 @@
 .RData
 .Ruserdata
 blogdown
+public
 .DS_Store
 .here
-notes/
-old/
+notes
+old
 **old/
 content/old/
 content/old
