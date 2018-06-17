@@ -1,0 +1,49 @@
+baseurl = "http://www.nickhatley.com"
+
+theme = "hugo-coder"
+
+languagecode = "en"
+
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+
+paginate = 20
+canonifyurls = true
+
+pygmentsstyle = "b2"
+pygmentscodefences = true
+pygmentscodefencesguesssyntax = true
+
+
+[params]
+    author = "Nick Hatley"
+    description = "place for stuff"
+    keywords = "NBA, rstats, NHL, politics"
+    info = "A place for things"
+
+    hideCredits = false
+    hideCopyright = false
+
+    # Custom CSS
+	custom_css = []
+
+[[params.social]]
+    name = "Github"
+    weight = 1
+    url = "https://github.com/nhatley"
+[[params.social]]
+    name = "Twitter"
+    weight = 2
+    url = "https://twitter.com/nhatley/"
+
+[[menu.main]]
+    name = "--Things--"
+    weight = 1
+    url  = "/posts/"
+[[menu.main]]
+    name = "--Things that Change--"
+    weight = 3
+    url  = "/posts/updaters/"
+[[menu.main]]
+    name = "About"
+    weight = 0
+    url = "/about/"
