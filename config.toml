@@ -6,12 +6,12 @@ languagecode = "en"
 
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
-paginate = 20
-canonifyurls = true
+#paginate = 20
+#canonifyurls = true
 
-pygmentsstyle = "b2"
-pygmentscodefences = true
-pygmentscodefencesguesssyntax = true
+#pygmentsstyle = "b2"
+#pygmentscodefences = true
+#pygmentscodefencesguesssyntax = true
 
 
 [params]
@@ -36,14 +36,16 @@ pygmentscodefencesguesssyntax = true
     url = "https://twitter.com/nhatley/"
 
 [[menu.main]]
-    name = "--Things--"
+    name = "Things"
+    description = "Blog-style one-off posts"
     weight = 1
     url  = "/things/"
 [[menu.main]]
-    name = "--Things that Change--"
-    weight = 3
+    name = "Changing Things"
+    description = "Posts that change themseleves based on data that is updated at time intervals"
+    weight = 2
     url  = "/things_that_change/"
 [[menu.main]]
     name = "About"
-    weight = 0
+    weight = 3
     url = "/about/"
