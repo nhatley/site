@@ -13,6 +13,11 @@
   </url>
   
   <url>
+    <loc>/things_that_change/</loc>
+    <lastmod>2018-03-07T07:51:49+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/things/2015-07-23-r-rmarkdown/</loc>
     <lastmod>2015-07-23T21:13:14-05:00</lastmod>
   </url>
@@ -26,11 +31,6 @@
   <url>
     <loc>/things/</loc>
     <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/things_that_change/</loc>
-    <lastmod>2018-06-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>

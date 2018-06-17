@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title></title>
+    <title>Things That Change on </title>
     <link>/things_that_change/</link>
-    <description>Recent content on </description>
+    <description>Recent content in Things That Change on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 17 Jun 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 07 Mar 2018 07:51:49 +0100</lastBuildDate>
     
 	<atom:link href="/things_that_change/index.xml" rel="self" type="application/rss+xml" />
     
