@@ -1,11 +1,11 @@
 ---
 title: "Crpytocurrency Charts"
 author: "Nick Hatley"
-date: 2018-03-03T20:50:11-05:00
+date: "`r format(Sys.Date())`"
 output:
   blogdown::html_page
 categories: ["R"]
-slug: crypto-charts
+slug: cryptocurrency-charts
 
 tags: ["R Markdown", "blogdown"]
 ---
