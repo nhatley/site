@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blogdown on </title>
-    <link>http://www.nickhatley.com/tags/blogdown/</link>
+    <link>/tags/blogdown/</link>
     <description>Recent content in Blogdown on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sat, 03 Mar 2018 20:50:11 -0500</lastBuildDate>
     
-	<atom:link href="http://www.nickhatley.com/tags/blogdown/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/blogdown/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Crpyto Charts</title>
-      <link>http://www.nickhatley.com/things_that_change/crypto-charts/</link>
+      <link>/things_that_change/crypto-charts/</link>
       <pubDate>Sat, 03 Mar 2018 20:50:11 -0500</pubDate>
       
-      <guid>http://www.nickhatley.com/things_that_change/crypto-charts/</guid>
+      <guid>/things_that_change/crypto-charts/</guid>
       <description>Cryptocurrency Candlestick Charts If you aren’t keen on finance or if you are new to these kinds of charts, as I was, I’ll explain them briefly:
  Each individual bars represent a day. The low point of the bars represent the low-point for the coin that day and so forth for the high/high point. The coloring represents where the coin closed that day in respect to the prior day.</description>
     </item>

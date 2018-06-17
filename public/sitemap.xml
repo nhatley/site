@@ -3,162 +3,162 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://www.nickhatley.com/about/</loc>
+    <loc>/about/</loc>
     <lastmod>2018-03-07T07:51:49+01:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/home/</loc>
+    <loc>/home/</loc>
     <lastmod>2018-03-07T07:51:49+01:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/things_that_change/crypto-charts/</loc>
+    <loc>/things_that_change/crypto-charts/</loc>
     <lastmod>2018-03-03T20:50:11-05:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/things_that_change/old/theme-demo/</loc>
+    <loc>/things_that_change/old/theme-demo/</loc>
     <lastmod>2017-01-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/things/2015-07-23-r-rmarkdown/</loc>
+    <loc>/things/2015-07-23-r-rmarkdown/</loc>
     <lastmod>2015-07-23T21:13:14-05:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/things_that_change/old/creating-a-new-theme/</loc>
+    <loc>/things_that_change/old/creating-a-new-theme/</loc>
     <lastmod>2014-09-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/things_that_change/old/hugo-template-primer/</loc>
+    <loc>/things_that_change/old/hugo-template-primer/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/things_that_change/old/hugoisforlovers/</loc>
+    <loc>/things_that_change/old/hugoisforlovers/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/things_that_change/old/migrate-from-jekyll/</loc>
+    <loc>/things_that_change/old/migrate-from-jekyll/</loc>
     <lastmod>2014-03-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/</loc>
+    <loc>/</loc>
     <lastmod>2018-03-07T07:51:49+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/old/about/</loc>
+    <loc>/old/about/</loc>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/tags/blogdown/</loc>
+    <loc>/tags/blogdown/</loc>
     <lastmod>2018-03-03T20:50:11-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/categories/</loc>
+    <loc>/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/tags/development/</loc>
+    <loc>/categories/development/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/categories/development/</loc>
+    <loc>/tags/development/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/tags/go/</loc>
+    <loc>/tags/go/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/tags/golang/</loc>
+    <loc>/categories/golang/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/categories/golang/</loc>
+    <loc>/tags/golang/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/tags/hugo/</loc>
+    <loc>/tags/hugo/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/old/</loc>
+    <loc>/old/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/tags/plot/</loc>
+    <loc>/tags/plot/</loc>
     <lastmod>2015-07-23T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/categories/r/</loc>
+    <loc>/categories/r/</loc>
     <lastmod>2018-03-03T20:50:11-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/tags/r-markdown/</loc>
+    <loc>/tags/r-markdown/</loc>
     <lastmod>2018-03-03T20:50:11-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/tags/regression/</loc>
+    <loc>/tags/regression/</loc>
     <lastmod>2015-07-23T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/tags/</loc>
+    <loc>/tags/</loc>
     <lastmod>2018-03-03T20:50:11-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/tags/templates/</loc>
+    <loc>/tags/templates/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/tags/themes/</loc>
+    <loc>/tags/themes/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/things/</loc>
+    <loc>/things/</loc>
     <lastmod>2015-07-23T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/things_that_change/</loc>
+    <loc>/things_that_change/</loc>
     <lastmod>2018-03-03T20:50:11-05:00</lastmod>
     <priority>0</priority>
   </url>
