@@ -6,16 +6,10 @@ languagecode = "en"
 
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
-paginate = 20
-
-pygmentsstyle = "b2"
-pygmentscodefences = true
-pygmentscodefencesguesssyntax = true
-
 
 [params]
     author = "Nick Hatley"
-    description = "place for stuff"
+    description = "A place for things"
     keywords = "NBA, rstats, NHL, politics"
     info = "A place for things"
 

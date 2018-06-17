@@ -67,7 +67,7 @@ all_data$time_period_end[[1]]
 
 
 
-### Six months
+### Six months {.tabset}
 ```{r, six_months}
 six_months = map(coins, function(x)
   make_ohlc_candlestick_md(symbol = x, time_frame = "six_months"))
@@ -76,7 +76,7 @@ htmltools::tagList(six_months)
 
 ***********
 
-### One year
+### One year {.tabset}
 ```{r, one_year}
 one_year = map(coins, function(x)
   make_ohlc_candlestick_md(symbol = x, time_frame = "one_year"))
@@ -85,7 +85,7 @@ htmltools::tagList(one_year)
 
 ***********
 
-### Two years
+### Two years {.tabset}
 ```{r, two_years}
 two_years = map(coins, function(x)
   make_ohlc_candlestick_md(symbol = x, time_frame = "two_years"))
