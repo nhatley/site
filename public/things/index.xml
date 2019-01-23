@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Things on </title>
-    <link>http://www.nickhatley.com/things/</link>
+    <link>/things/</link>
     <description>Recent content in Things on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Wed, 23 Jan 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://www.nickhatley.com/things/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/things/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Using tidyverse tools with Pew Research Center survey data in R</title>
-      <link>http://www.nickhatley.com/things/tidyverse-survey-data/</link>
+      <link>/things/tidyverse-survey-data/</link>
       <pubDate>Wed, 23 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://www.nickhatley.com/things/tidyverse-survey-data/</guid>
+      <guid>/things/tidyverse-survey-data/</guid>
       <description>What is the “tidyverse”? R is free and open-source software that anyone can contribute to. The most common kinds of contributions are collections of R code called packages. R packages are typically hosted on The Comprehensive R Archive Network (CRAN), but can also be found on other primarily open-source code repositories like github, gitlab, or bioconductor. The ability for anyone to be able to build an R package and contribute to R’s development is a key component of R’s utility, but with so many packages (13,581 packages on CRAN as of 12/27/18), there are often many different ways to tackle the same challenge.</description>
     </item>
     

@@ -219,8 +219,10 @@ Apr17_long = Apr17 %>%
 The `educ_cat:gen5` section of the call to `gather()` can be read as "gather all columns from `educ_cat` through `gen5`". After the `gather()` step, this leaves us with a "long" dataset of now 4,503 rows.
 
 
-```{r fig.cap='*TKTKTK insert graphic Bill is working on* similar to https://github.com/apreshill/teachthat/blob/master/gather/gather-gif/gather-01.png', fig.align='center', out.width = "80%", out.height= "80%"}
-knitr::include_graphics(here::here("resources", "19.01.07_decodedTidyverse640px.png"))
+```{r}
+htmltools::img(src = knitr::image_uri(here::here("resources", "19.01.07_decodedTidyverse640px.png")),
+               style = 'height:725px;width:650px'
+               )
 ```
 
 
