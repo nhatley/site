@@ -8,12 +8,6 @@ categories: ["R"]
 slug: tidyverse-survey data
 ---
 
-```{r, echo=FALSE}
-htmltools::img(src = knitr::image_uri(here::here("resources", "center_wheel_logo.png")),
-               alt = 'logo',
-               style = 'position:absolute; top:0; right:0; padding:10px;')
-```
-
 
 
 ```{r setup, include=FALSE}
