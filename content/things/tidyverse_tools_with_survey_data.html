@@ -1,0 +1,433 @@
+---
+title: "Using tidyverse tools with Pew Research Center survey data in R"
+author: "Nick Hatley"
+date: "2019-01-23"
+output:
+  html_document: default
+---
+
+
+
+<img src="data:image/png;base64,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cm9tIHJkZjpwYXJzZVR5cGU9IlJlc291cmNlIj4KICAgICAgICAgICAgPHN0UmVmOmluc3RhbmNlSUQ+dXVpZDo0YmI1YjNhMC04MGE2LTQwZWMtYmY5NC0xYmM2MTFkZWFkOTI8L3N0UmVmOmluc3RhbmNlSUQ+CiAgICAgICAgICAgIDxzdFJlZjpkb2N1bWVudElEPnhtcC5kaWQ6YTg3MDhhODctYjBkNC00MTQyLWI4ZTAtYTI4ZDMwNjcwNWY2PC9zdFJlZjpkb2N1bWVudElEPgogICAgICAgICA8L3htcE1NOkRlcml2ZWRGcm9tPgogICAgICAgICA8eG1wTU06RG9jdW1lbnRJRD54bXAuZGlkOjE5Q0RFRkNDNDQ1ODExRTdCNDk0QzY2NzkzQTg4Q0I1PC94bXBNTTpEb2N1bWVudElEPgogICAgICAgICA8eG1wTU06SW5zdGFuY2VJRD54bXAuaWlkOjE5Q0RFRkNCNDQ1ODExRTdCNDk0QzY2NzkzQTg4Q0I1PC94bXBNTTpJbnN0YW5jZUlEPgogICAgICAgICA8eG1wTU06T3JpZ2luYWxEb2N1bWVudElEPnV1aWQ6QUYwNDM2RUE5MDNCMTFEQjkwREZENUNDREJGNzM0MjM8L3htcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD4KICAgICAgICAgPHRpZmY6T3JpZW50YXRpb24+MTwvdGlmZjpPcmllbnRhdGlvbj4KICAgICAgICAgPHhtcDpDcmVhdG9yVG9vbD5BZG9iZSBJbGx1c3RyYXRvciBDQyAyMDE3IChXaW5kb3dzKTwveG1wOkNyZWF0b3JUb29sPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KOc3V1AAAJrBJREFUeAHtnQW8b0URgA+K3d3yUEBUHjYoBoiFjd0KttidiN0Idnd3t09QsZMyQN/DRlBBERM4zje87zj33HPvu/WPd2Hv7/53z56N2dnZmdnZOFu04Zoz3ZkYWCYGtlxm/s0+O+PIsYR/lrOcpdliiy0G21XTkoB0c6UdLGAVR24RyDnDcCQJoXZ+DdvPpOvHD8XV9IRN089rutXsnyEISQKC2/TdSX/7W3PsH//Y/C38k046qdluu+2aS1/60h1R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" alt="logo" style="position:absolute; top:0; right:0; padding:10px;"/>
+<div id="what-is-the-tidyverse" class="section level2">
+<h2>What is the “tidyverse”?</h2>
+<p>R is free and open-source software that anyone can contribute to. The most common kinds of contributions are collections of R code called <a href="https://cran.r-project.org/web/packages/">packages</a>. R packages are typically hosted on <a href="https://cran.r-project.org/">The Comprehensive R Archive Network</a> (CRAN), but can also be found on other primarily open-source code repositories like <a href="https://github.com/">github</a>, <a href="https://about.gitlab.com/">gitlab</a>, or <a href="https://www.bioconductor.org/">bioconductor</a>. The ability for anyone to be able to build an R package and contribute to R’s development is a key component of R’s utility, but with so many packages (13,581 packages on CRAN as of 12/27/18), there are often many different ways to tackle the same challenge. This can lead to inconsistencies in R syntax that are often confusing and make it harder new users or those looking to develop their R skills to do so.</p>
+<p>Enter the <a href="https://www.tidyverse.org/">tidyverse</a> – a collection of R packages designed for data science that share a consistent design philosophy and produce code that can be more easily understood and thus shared among people. The tidyverse also has a <a href="https://community.rstudio.com/c/tidyverse">growing community</a> of users, contributors, and developers that aim to help R users access and learn these free, open-source tools. The book <em>R for Data Science</em> by Hadley Wickham and Garrett Grolemund walks through many key components of how to use these tools to do data science in R and can be <a href="https://r4ds.had.co.nz/">accessed freely online</a>.</p>
+<p>Earlier this year, I wrote an <a href="https://medium.com/pew-research-center-decoded/how-to-analyze-pew-research-center-survey-data-in-r-f326df360713">introductory</a> post on how to access and analyze Pew Research Center survey data using R.</p>
+<p>There, I showed how to analyze Center data using the <a href="https://cran.r-project.org/web/packages/survey/index.html">survey</a> package. The <code>survey</code> package is ideal if you are analyzing survey data and need variance estimates that account for the complex sample design (e.g. weighting or stratification). However, the first step in any data analysis is often to explore the data with simple but powerful summaries such as crosstabs and plots. This usually requires a lot of recoding variables, data cleaning and other data manipulation tasks. The <code>tidyverse</code> offers many straightforward tools to accomplish that. Here, I show how to use <code>tidyverse</code> tools to do explatory analyses of Pew Research Center survey data. (Of course, these tools can also be used with survey data from any source.)</p>
+</div>
+<div id="packages" class="section level2">
+<h2>Packages</h2>
+<p>For this post we will need the <code>tidyverse</code> and <code>haven</code> packages. The <a href="https://haven.tidyverse.org/">haven package</a> is the tidyvere’s solution for importing and exporting data from several different formats, including SPSS (the format in which most Center datasets are released), SAS, and Stata.</p>
+<p>The only functions from the haven package we will use here are <code>read_sav</code> and <code>as_factor</code>; all other functions referenced in this post come from packages like <code>dplyr</code>, <code>forcats</code>, or <code>ggplot2</code> that are loaded automatically when we load the <a href="https://www.tidyverse.org/packages/">tidyverse</a> package.</p>
+<p>If you don’t already have these packages, to run the code in this post, you will first need to install the packages. Even if you have already installed these packages, you can update them by running the below code:</p>
+<pre class="r"><code>install.packages(&quot;tidyverse&quot;)
+install.packages(&quot;haven&quot;) </code></pre>
+<p>Then, load the packages in with the <code>library()</code> function:</p>
+<pre class="r"><code>library(tidyverse) #loads all &quot;core&quot; tidyverse packages like dplyr, tidyr, forcats, and ggplot2
+library(haven) </code></pre>
+<div id="pipes" class="section level3">
+<h3>Pipes</h3>
+<p>A key element in the readability of tidyverse code is the pipe, a set of three characters that look like this: <code>%&gt;%</code>. Placing a pipe tells R to take what’s on its left and <em>pipe</em> it to its right. This allows you to chain multiple commands together without getting lost in a hailstorm of parentheses.</p>
+<p>For example, using the <code>starwars</code> dataset that comes attached to the <code>tidyverse</code> package, we can write two equivalent lines of code that filters the dataset to all characters for whom a height is known, arranges the dataset in order of decreasing height, and changes height from centimeters to inches.</p>
+<p>The first, without the pipe:</p>
+<pre class="r"><code>mutate(arrange(filter(starwars, !is.na(height)), desc(height)), height = 0.393701 * height)</code></pre>
+<p>With the pipe, the code would be:</p>
+<pre class="r"><code>starwars %&gt;% 
+  filter(!is.na(height)) %&gt;%
+  arrange(desc(height)) %&gt;%
+  mutate(height = 0.393701 * height)</code></pre>
+<p>As far as R is concerned, these two pieces of code do exactly the same thing, but using a pipeline makes it much easier for humans to read and understand exactly what’s going on and in what order. The code above can be easily read a series of steps: 1) take the starwars dataset, 2) filter it to cases where height is not missing, 3) then arrange the remaining cases by height in descending order, and finally 4) change the height variable to inches. Readability makes it easier to share your code with other people. Even if you’ll never share your code with anyone else, this approach will be easier for you to understand your own code if you ever need to revisit it weeks, months, or even years later when the details are no longer fresh in your memory.</p>
+<p>Beyond readability, pipes make your code easier to maintain. It’s easy to remove a step, insert a new step, or change the order when all of the commands are in a sequential pipeline rather than nested.</p>
+</div>
+</div>
+<div id="loading-the-data-into-r" class="section level2">
+<h2>Loading the Data into R</h2>
+<p>Datasets available for download can be accessed via the ‘Datasets’ tab on the Center website or via <a href="http://www.pewresearch.org/download-datasets/">this link</a>. For more information about the kind of data the Center releases and more details about how to access that data, see <a href="http://www.pewresearch.org/download-datasets/">this post</a>.</p>
+<p>For this post, we will use the <a href="http://www.people-press.org/dataset/april-2017-political-survey/">April 2017 Political Survey</a> data. We will walk through how to use tidyverse tools to calculate weighted survey estimates (President Trump’s approval) by other variables in our dataset (education, race/ethnicity, and generation).</p>
+<p>Almost all of the datasets available to download from the Center are stored as .sav (SPSS) files. SPSS files often contain variables with both numeric values and character labels (e.g. for party ID, 1 = Republican, 2 = Democrat). When loading the data, the user has to decide which of the values or value labels she wants to the dataset to contain in R.</p>
+<p>The first step is to load the dataset into your R environment. We accomplish this with the <code>read_sav</code> function from haven. We set <code>user_na = TRUE</code> to ensure that responses such as “Don’t Know” or “Refused” aren’t automatically converted to missing values. We want the dataset to be read in with value labels (e.g. “Republican” instead of 1“) and for categorical variables be stored as <a href="https://r4ds.had.co.nz/factors.html">factors</a> so we then pipe (<code>%&gt;%</code>) that into haven’s <code>as_factor</code> function.</p>
+<pre class="r"><code>Apr17 &lt;- read_sav(&quot;Apr17 public.sav&quot;, user_na = TRUE) %&gt;% as_factor()</code></pre>
+</div>
+<div id="adding-variables-with-mutate" class="section level2">
+<h2>Adding variables with <code>mutate</code></h2>
+<p>The first question (<code>q1</code>) on the April 2017 survey asked whether or not respondents approved of President Donald Trump’s performance as president so far. The following question (<code>q1a</code>) asked respondents how strongly they approved or disapproved. We want to use these two variables to create a new variable that combines <code>q1</code> and <code>q1a</code>. To do this we use the <a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a> function. <code>mutate</code> is a<a href="https://dplyr.tidyverse.org/"><code>dplyr</code></a> function (that is loaded automatically when calling <code>library(tidyverse)</code>). It adds new variables to a data frame or modifies existing variables. We use the code below to create a variable called <code>trump_approval</code>.</p>
+<p>It can be tricky to create new variables that are composites of two or more existing variables using only basic R functions, but it is made easier with the <a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a> function from <code>dplyr</code>. Inside the <code>mutate</code> function, we use <code>case_when</code> to assign our new categories.</p>
+<pre class="r"><code>Apr17 &lt;- Apr17 %&gt;% 
+  mutate(trump_approval = case_when(
+    q1 == &quot;Approve&quot; &amp; q1a == &quot;Very strongly&quot; ~ &quot;Strongly approve&quot;,
+    q1 == &quot;Approve&quot; &amp; q1a == &quot;Not so strongly&quot; ~ &quot;Not strongly approve&quot;,
+    q1 == &quot;Disapprove&quot; &amp; q1a == &quot;Very strongly&quot; ~ &quot;Strongly disapprove&quot;,
+    q1 == &quot;Disapprove&quot; &amp; q1a == &quot;Not so strongly&quot; ~ &quot;Not strongly disapprove&quot;,
+    q1 == &quot;Don&#39;t know/Refused (VOL.)&quot; | q1a == &quot;Don&#39;t know/Refused (VOL.)&quot; ~ &quot;Refused&quot;
+                                  ) #this parentheses closes our call to case_when
+                                    %&gt;% #and then sends it to fct_relevel with %&gt;% 
+    fct_relevel(&quot;Strongly approve&quot;,
+                &quot;Not strongly approve&quot;,
+                &quot;Not strongly disapprove&quot;,
+                &quot;Strongly disapprove&quot;,                             
+                &quot;Refused&quot;                
+                ) #this parentheses closes our call to fct_relevel
+  ) #this parentheses closes our call to mutate</code></pre>
+<p>We supply a series of formulas to the <code>case_when</code> function. Each formula is an if-then statement, where the left hand side (everything to the left of <code>~</code>) describes a logical condition, and the right-hand side provides the value to return if that condition is true. As a reminder, you can type <code>?case_when()</code> to access the help page for the case_when or other R functions.</p>
+<p>The first line of the call to <code>case_when</code> is: <code>q1 == &quot;Approve&quot; &amp; q1a == &quot;Very strongly&quot; ~ &quot;Strongly approve&quot;</code>. This can be read to mean that respondent said “Approve” to q1 and answered “Very Strongly” to q1a, code them as “Strongly approve” in our new <code>trump_approval</code> variable. We use five different clauses to make these new categories and add the <code>trump_approval</code> variable to our dataset.</p>
+<p>Then we pipe the variable we created with <code>case_when</code> to the <a href="https://forcats.tidyverse.org/reference/fct_relevel.html">fct_relevel</a> function from the <a href="https://forcats.tidyverse.org/">forcats</a> package. This coerces <code>trump_approval</code> to a factor variable and orders it from “Strongly approve” to “Refused.”</p>
+<p>We can run the <code>table</code> command on our new variable to verify that everything worked as intended.</p>
+<pre class="r"><code>table(Apr17$trump_approval, Apr17$q1, useNA = &quot;always&quot;)</code></pre>
+<pre><code>##                          
+##                           Approve Disapprove Don&#39;t know/Refused (VOL.)
+##   Strongly approve            476          0                         0
+##   Not strongly approve        113          0                         0
+##   Not strongly disapprove       0        129                         0
+##   Strongly disapprove           0        676                         0
+##   Refused                      17         14                        76
+##   &lt;NA&gt;                          0          0                         0
+##                          
+##                           &lt;NA&gt;
+##   Strongly approve           0
+##   Not strongly approve       0
+##   Not strongly disapprove    0
+##   Strongly disapprove        0
+##   Refused                    0
+##   &lt;NA&gt;                       0</code></pre>
+<p>In this example, we will look at how our new <code>trump_approval</code> variable breaks down according to a few different demographics: educational attainment (<code>educ2</code> in the Apr17 dataset), race/ethnicty (<code>racethn</code>), and generation (<code>gen5</code>).</p>
+<p>But, <code>educ2</code> has 9 categories, so it is beneficial to collapse them to fewer categories with larger numbers of respondents. We can do this with the <code>forcats</code> function <a href="https://forcats.tidyverse.org/reference/fct_collapse.html">fct_collapse</a>. We use <code>mutate</code> again to make new variables.</p>
+<p>Let’s first check the answer options of <code>educ2</code> to see the categories we need to collapse. Since we used <code>as_factor</code> when we read the dataset in, <code>educ2</code> is a factor variable. So, we can see the answer options by using the <code>levels</code> function.</p>
+<pre class="r"><code>levels(Apr17$educ2)</code></pre>
+<pre><code>## [1] &quot;Less than high school (Grades 1-8 or no formal schooling)&quot;                                
+## [2] &quot;High school incomplete (Grades 9-11 or Grade 12 with NO diploma)&quot;                         
+## [3] &quot;High school graduate (Grade 12 with diploma or GED certificate)&quot;                          
+## [4] &quot;Some college, no degree (includes some community college)&quot;                                
+## [5] &quot;Two year associate degree from a college or university&quot;                                   
+## [6] &quot;Four year college or university degree/Bachelor&#39;s degree (e.g., BS, BA, AB)&quot;              
+## [7] &quot;Some postgraduate or professional schooling, no postgraduate degree&quot;                      
+## [8] &quot;Postgraduate or professional degree, including master&#39;s, doctorate, medical or law degree&quot;
+## [9] &quot;Don&#39;t know/Refused (VOL.)&quot;</code></pre>
+<p>Now that we know the levels, we can collapse them into fewer categories. The first argument to <code>fct_collapse</code> is the variable you want to collapse into fewer categories, in our case <code>educ2</code>. We assign new categories on the left, like “High School or Grad or Less”, in the below example. We use the <code>c()</code> function to tell <code>fct_collapse</code> these categories belong in our new “High School or Grad or Less” category. Note that you need to use the exact names of these categories!</p>
+<pre class="r"><code>Apr17 = Apr17 %&gt;% 
+  mutate(educ_cat = fct_collapse(educ2,
+          &quot;High School Grad or Less&quot; = c(
+                    &quot;Less than high school (Grades 1-8 or no formal schooling)&quot;,
+                    &quot;High school incomplete (Grades 9-11 or Grade 12 with NO diploma)&quot;,                         
+                    &quot;High school graduate (Grade 12 with diploma or GED certificate)&quot;),
+          &quot;Some college&quot; = c(
+                    &quot;Some college, no degree (includes some community college)&quot;,                                
+                    &quot;Two year associate degree from a college or university&quot;),
+           &quot;College grad+&quot; = c(
+                    &quot;Four year college or university degree/Bachelor&#39;s degree (e.g., BS, BA, AB)&quot;,              
+                    &quot;Some postgraduate or professional schooling, no postgraduate degree&quot;,                      
+                    &quot;Postgraduate or professional degree, including master&#39;s, doctorate, medical or law degree&quot;)
+                                ) #this parentheses closes our call to fct_collapse
+      ) #this parentheses closes our call to mutate</code></pre>
+<p>Again, we can do a table on our new variable to check everything worked as intended.</p>
+<pre class="r"><code>table(Apr17$educ_cat, useNA = &quot;always&quot;)</code></pre>
+<pre><code>## 
+##  High School Grad or Less              Some college 
+##                       412                       387 
+##             College grad+ Don&#39;t know/Refused (VOL.) 
+##                       695                         7 
+##                      &lt;NA&gt; 
+##                         0</code></pre>
+</div>
+<div id="getting-weighted-estimates-with-group_by-and-summarise" class="section level2">
+<h2>Getting weighted estimates with group_by and summarise</h2>
+<p>Now that we have created and recoded the variables we wish to estimate, we can use <a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a> and <a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a> to produce some weighted summaries of the data. We use <code>group_by</code> to tell R to group the Apr17 dataset by these variables, and then <code>summarise</code> to create summary statistics among those groups.</p>
+<p>To make sure our estimates are representative of the population we need to use the survey weights (variable named <code>weight</code>) included in our (and almost every Center) dataset. Inside our <code>summarise</code> call we first get the weighted total of the groups we are intereseted in. We do this by taking a sum of the <code>weight</code> variable.</p>
+<p>So, the first step in code is:</p>
+<pre class="r"><code>trump_estimates_educ = Apr17 %&gt;% 
+  group_by(educ_cat, trump_approval) %&gt;% 
+  summarise(weighted_n = sum(weight)) </code></pre>
+<p>If we look at the <code>trump_estimates_educ</code> object that we just created with <code>group_by</code> and <code>summarise</code>, we can see we have a column for each of the variables we passed to <code>group_by</code> (<code>educ_cat</code> and <code>trump_approval</code>) and a column we created called <code>weighted_n</code>. The <code>weighted_n</code> column is the weighted sum of each category in the <code>trump_approval</code> variable we just created by education.</p>
+<pre class="r"><code>trump_estimates_educ</code></pre>
+<pre><code>## # A tibble: 17 x 3
+## # Groups:   educ_cat [?]
+##    educ_cat                  trump_approval          weighted_n
+##    &lt;fct&gt;                     &lt;fct&gt;                        &lt;dbl&gt;
+##  1 High School Grad or Less  Strongly approve            550.  
+##  2 High School Grad or Less  Not strongly approve        173.  
+##  3 High School Grad or Less  Not strongly disapprove     205.  
+##  4 High School Grad or Less  Strongly disapprove         593.  
+##  5 High School Grad or Less  Refused                     189.  
+##  6 Some college              Strongly approve            404.  
+##  7 Some college              Not strongly approve         91.3 
+##  8 Some college              Not strongly disapprove     117.  
+##  9 Some college              Strongly disapprove         605.  
+## 10 Some college              Refused                     120.  
+## 11 College grad+             Strongly approve            336.  
+## 12 College grad+             Not strongly approve         84.4 
+## 13 College grad+             Not strongly disapprove      98.1 
+## 14 College grad+             Strongly disapprove         676.  
+## 15 College grad+             Refused                      63.8 
+## 16 Don&#39;t know/Refused (VOL.) Strongly approve              2.97
+## 17 Don&#39;t know/Refused (VOL.) Strongly disapprove          10.3</code></pre>
+<p>But, since we want to show proportions we have another step to do. After calculating the <code>weighted_n</code> of each education category by Trump approval, we now need to know the weighted group size of the education categories overall. We do this by grouping by <strong>only</strong> <code>educ_cat</code>. Then, we use mutate to add a column of the sum of each educaation categories weighted total size. This leaves us with a weighted total of how many people are in that education category and a weighted total for how many people in that education category “Strongly Approve” through “Strongly Disapprove” in <code>trump_approval</code>. To calculate proportions all we have to do is divide the weighted total group size <code>weighted_group_size</code> by the <code>weighted_n</code> we calculated earlier.</p>
+<pre class="r"><code>trump_estimates_educ = Apr17 %&gt;% 
+  #group by education and trump approval
+  group_by(educ_cat, trump_approval) %&gt;% 
+  #calculate the total number of people in each answer and education category using survey weights (weight)
+  summarise(weighted_n = sum(weight)) %&gt;% 
+  #group by education to calculate education category size
+  group_by(educ_cat) %&gt;%
+  #add columns for total group size and the proportion
+  mutate(weighted_group_size = sum(weighted_n),
+         weighted_estimate = weighted_n/weighted_group_size)
+
+trump_estimates_educ</code></pre>
+<pre><code>## # A tibble: 17 x 5
+## # Groups:   educ_cat [4]
+##    educ_cat   trump_approval  weighted_n weighted_group_… weighted_estima…
+##    &lt;fct&gt;      &lt;fct&gt;                &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+##  1 High Scho… Strongly appro…     550.             1710.            0.322 
+##  2 High Scho… Not strongly a…     173.             1710.            0.101 
+##  3 High Scho… Not strongly d…     205.             1710.            0.120 
+##  4 High Scho… Strongly disap…     593.             1710.            0.347 
+##  5 High Scho… Refused             189.             1710.            0.111 
+##  6 Some coll… Strongly appro…     404.             1337.            0.302 
+##  7 Some coll… Not strongly a…      91.3            1337.            0.0683
+##  8 Some coll… Not strongly d…     117.             1337.            0.0873
+##  9 Some coll… Strongly disap…     605.             1337.            0.453 
+## 10 Some coll… Refused             120.             1337.            0.0896
+## 11 College g… Strongly appro…     336.             1258.            0.267 
+## 12 College g… Not strongly a…      84.4            1258.            0.0671
+## 13 College g… Not strongly d…      98.1            1258.            0.0780
+## 14 College g… Strongly disap…     676.             1258.            0.537 
+## 15 College g… Refused              63.8            1258.            0.0507
+## 16 Don&#39;t kno… Strongly appro…       2.97             13.3           0.224 
+## 17 Don&#39;t kno… Strongly disap…      10.3              13.3           0.776</code></pre>
+<p>But, <code>educ2</code> is not the only variable we are interested in for this analysis. We know we need to add the <code>racethn</code> and <code>gen5</code> variables at some step. With some reshaping of the data using the <code>gather</code> function, we can use the same steps we used above with <code>educ_cat</code> to get all of our subgroup summaries at once.</p>
+</div>
+<div id="rearranging-data-with-gather" class="section level2">
+<h2>Rearranging data with <code>gather()</code></h2>
+<p>The first step to make the process a bit simpler is taking the <code>Apr17</code> dataset and selecting down to only the columns we need for our analysis using the <a href="https://dplyr.tidyverse.org/reference/select.html">select</a> function. The <code>select</code> function is like a swiss-army knife of keeping, rearranging, or dropping (using <code>-</code>) columns. There are also a number of <a href="https://www.rdocumentation.org/packages/tidyselect/versions/0.2.5/topics/select_helpers">helper functions</a> like <code>starts_with()</code>, <code>ends_with()</code>, <code>matches()</code> that make it easy to select a number of columns with a certain pattern instead of naming each column explicitly.</p>
+<pre class="r"><code>Apr17 = Apr17 %&gt;% 
+  select(trump_approval, weight, educ_cat, racethn, gen5)</code></pre>
+<p>This line of code with the <code>select()</code> function will change the <code>Apr17</code> object to contain only the columns we need for our analysis (<code>trump_approval</code>, the survey weight <code>weight</code>, or one of the subgroup variables we are interested in).</p>
+<pre class="r"><code>head(Apr17)</code></pre>
+<pre><code>## # A tibble: 6 x 5
+##   trump_approval      weight educ_cat            racethn      gen5        
+##   &lt;fct&gt;                &lt;dbl&gt; &lt;fct&gt;               &lt;fct&gt;        &lt;fct&gt;       
+## 1 Strongly disapprove   2.94 College grad+       Black, non-… Silent (192…
+## 2 Not strongly appro…   1.32 Some college        Hispanic     Boomer (194…
+## 3 Strongly disapprove   1.24 College grad+       White, non-… Silent (192…
+## 4 Strongly approve      4.09 Some college        White, non-… Boomer (194…
+## 5 Refused               1.12 College grad+       White, non-… Boomer (194…
+## 6 Strongly disapprove   6.68 High School Grad o… Black, non-… Boomer (194…</code></pre>
+<p>Now that we have selected <code>Apr17</code> down to the columns we want for our analysis, the next step is to rearrange the data in a way that will be easy to calculate the weighted summary statistics by each subgroup (<code>educ_cat</code>, <code>racethn</code>, and <code>gen5</code>) we are interested in. We do this rearranging with the <a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a> function. The <code>gather</code> function is an extremely useful function when working with data.</p>
+<p>It reshapes data from “wide” to “long” format to contain one new column that serves as a “key” and corresponding column for a “value”. The goal here is to combine our three subgroup columns into a pair of columns; one will be a “key” column (<code>subgroup_variable</code>) that tells us where the subgroup value comes from (one of <code>educ_cat</code>, <code>racethn</code>, or <code>gen5</code>) and a “value” column called <code>subgroup</code> that reflects the corresponding value of our subgroup columns.</p>
+<pre class="r"><code>Apr17_long = Apr17 %&gt;% 
+  #gather educ_cat, racethn, gen5 into two columns: 
+  ##a key  called &quot;subgroup variable&quot; (educ_cat, racethn, gen5)
+  ##and a value called &quot;subgroup&quot; (&quot;High School Grad or Less&quot;, &quot;Black, non-Hispanic&quot;, &quot;Millenial (1981-&quot;) 
+  gather(key = subgroup_variable, value = subgroup, educ_cat:gen5) </code></pre>
+<p>The <code>educ_cat:gen5</code> section of the call to <code>gather()</code> can be read as “gather all columns from <code>educ_cat</code> through <code>gen5</code>”. After the <code>gather()</code> step, this leaves us with a “long” dataset of now 4,503 rows.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
+<img src="/Users/nhatley/Dropbox/main_site2/resources/19.01.07_decodedTidyverse640px.png" alt="*TKTKTK insert graphic Bill is working on* similar to https://github.com/apreshill/teachthat/blob/master/gather/gather-gif/gather-01.png" width="80%" height="80%" />
+<p class="caption">
+Figure 1: <em>TKTKTK insert graphic Bill is working on</em> similar to <a href="https://github.com/apreshill/teachthat/blob/master/gather/gather-gif/gather-01.png" class="uri">https://github.com/apreshill/teachthat/blob/master/gather/gather-gif/gather-01.png</a>
+</p>
+</div>
+<pre class="r"><code>Apr17_long</code></pre>
+<pre><code>## # A tibble: 4,503 x 4
+##    trump_approval       weight subgroup_variable subgroup                
+##    &lt;fct&gt;                 &lt;dbl&gt; &lt;chr&gt;             &lt;chr&gt;                   
+##  1 Strongly disapprove    2.94 educ_cat          College grad+           
+##  2 Not strongly approve   1.32 educ_cat          Some college            
+##  3 Strongly disapprove    1.24 educ_cat          College grad+           
+##  4 Strongly approve       4.09 educ_cat          Some college            
+##  5 Refused                1.12 educ_cat          College grad+           
+##  6 Strongly disapprove    6.68 educ_cat          High School Grad or Less
+##  7 Strongly disapprove    1.79 educ_cat          Some college            
+##  8 Not strongly approve   1    educ_cat          College grad+           
+##  9 Strongly disapprove    4.47 educ_cat          High School Grad or Less
+## 10 Strongly disapprove    1.32 educ_cat          College grad+           
+## # ... with 4,493 more rows</code></pre>
+<p>This leaves us with a column that indicates a respondent’s answer to <code>trump_approval</code>, their survey weight (<code>weight</code>), an indidator for the subgroup variable (<code>subgroup_variable</code>), and their subgroup value (<code>subgroup</code>).</p>
+<p>We can check to make sure all of our subgroups are in the <code>Apr17_long</code> with the <code>table()</code> function.</p>
+<pre class="r"><code>table(Apr17_long$subgroup_variable, useNA = &quot;always&quot;)</code></pre>
+<pre><code>## 
+## educ_cat     gen5  racethn     &lt;NA&gt; 
+##     1501     1501     1501        0</code></pre>
+<pre class="r"><code>table(Apr17_long$subgroup, useNA = &quot;always&quot;)</code></pre>
+<pre><code>## 
+##            Black, non-Hisp           Boomer (1946-64) 
+##                        164                        504 
+##              College grad+                     DK/Ref 
+##                        695                         21 
+##  Don&#39;t know/Refused (VOL.) Greatest and older (-1928) 
+##                         58                          3 
+##   High School Grad or Less                   Hispanic 
+##                        412                        152 
+##         Millennial (1981-)                      Other 
+##                        430                        111 
+##           Silent (1928-45)               Some college 
+##                        191                        387 
+##            White, non-Hisp              Xer (1965-80) 
+##                       1023                        352 
+##                       &lt;NA&gt; 
+##                          0</code></pre>
+<p>If you want to read more about <code>gather</code>, I would recommend starting with <a href="https://twitter.com/WeAreRLadies/status/1059520693857996800">this tweet</a> by <a href="https://twitter.com/apreshill">Alison Hill</a> from the <a href="https://twitter.com/WeAreRLadies">WeAreRLadies</a> twitter account. You can also go the <a href="https://r4ds.had.co.nz/tidy-data.html#gathering">Tidy Data</a> chapter in the previously mentioned <em>R for Data Science</em> book.</p>
+<p>Now that we have our data arrange in this format, we can follow the same steps we used to get weighted summaries for <code>educ_cat</code> on all three subgroup variables at once. Instead of passing <code>educ_cat</code> to the <code>group_by()</code> function we pass our new <code>subgroup_variable</code> and <code>subgroup</code> columns.</p>
+<pre class="r"><code>trump_estimates = Apr17_long %&gt;% 
+  #group by subgroup_variable, subgroup, and trump approval
+  group_by(subgroup_variable, subgroup, trump_approval) %&gt;% 
+  #calculate the total number of people in each answer and education category using survey weights (weight)
+  summarise(weighted_n = sum(weight)) %&gt;% 
+  #group by subgroup only to calculate subgroup category size
+  group_by(subgroup) %&gt;%
+  #add columns for total group size and the proportion
+  mutate(weighted_group_size = sum(weighted_n),
+         weighted_estimate = weighted_n/weighted_group_size)</code></pre>
+<p>Since we are only really interested in the proportions we remove the <code>weighted_total</code> and <code>weighted_group_size</code> columns using the <code>select()</code> function. Including the <code>-</code> before a column name tells <code>select()</code> to drop that column.</p>
+<pre class="r"><code>trump_estimates = trump_estimates %&gt;% 
+  select(-weighted_n, -weighted_group_size) </code></pre>
+<p>Here’s what we end up with.</p>
+<pre class="r"><code>trump_estimates</code></pre>
+<pre><code>## # A tibble: 70 x 4
+## # Groups:   subgroup [14]
+##    subgroup_variable subgroup          trump_approval     weighted_estima…
+##    &lt;chr&gt;             &lt;chr&gt;             &lt;fct&gt;                         &lt;dbl&gt;
+##  1 educ_cat          College grad+     Strongly approve             0.267 
+##  2 educ_cat          College grad+     Not strongly appr…           0.0671
+##  3 educ_cat          College grad+     Not strongly disa…           0.0780
+##  4 educ_cat          College grad+     Strongly disappro…           0.537 
+##  5 educ_cat          College grad+     Refused                      0.0507
+##  6 educ_cat          Don&#39;t know/Refus… Strongly approve             0.0203
+##  7 educ_cat          Don&#39;t know/Refus… Strongly disappro…           0.0704
+##  8 educ_cat          High School Grad… Strongly approve             0.322 
+##  9 educ_cat          High School Grad… Not strongly appr…           0.101 
+## 10 educ_cat          High School Grad… Not strongly disa…           0.120 
+## # ... with 60 more rows</code></pre>
+<p>Arranging the data this way makes it easy to create plots or tables of the variables of interest. Below is an example of a simple plot of the estimates we created in this post. We use the <a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a> function to remove the “Refused” category in the trump_approval variable and in any of our subgroup variables.</p>
+<pre class="r"><code>trump_estimates %&gt;% 
+  filter(trump_approval != &quot;Refused&quot;) %&gt;% 
+  filter(!(subgroup %in% c(&quot;Don&#39;t know/Refused (VOL.)&quot;, &quot;DK/Ref&quot;))) %&gt;% 
+  ggplot(
+    aes(
+      x = weighted_estimate,
+      y = subgroup
+    )
+  ) +
+  geom_point() + 
+  scale_x_continuous(limits = c(0, 1),
+                     breaks = seq(0,1, by = .2),
+                     labels = scales::percent(seq(0,1, by = .2), accuracy = 1)
+  ) +
+  facet_grid(cols = vars(trump_approval),
+             rows = vars(subgroup_variable), 
+             scales = &quot;free_y&quot;,
+             space = &quot;free&quot;
+             ) +
+  theme_bw() +
+  theme(axis.title.y = element_blank())</code></pre>
+<p><img src="/things/tidyverse_tools_with_survey_data_files/figure-html/weighted_percentages%20plot-1.png" width="816" /></p>
+<p>Here is all the necessary code used in the post</p>
+<pre class="r"><code>#code from start to finish 
+
+##install or update packages if neccessary
+#install.packages(&quot;tidyverse&quot;)
+#install.packages(&quot;haven&quot;) 
+
+##load packages in 
+library(tidyverse) #loads all &quot;core&quot; tidyverse packages like dplyr, tidyr, forcats, and ggplot2
+library(haven) 
+
+##read dataset in with value labels (as_factor)
+Apr17 &lt;- read_sav(&quot;Apr17 public.sav&quot;, user_na = TRUE) %&gt;% as_factor()
+
+##create trump_approval variable and relevel it 
+Apr17 &lt;- Apr17 %&gt;% 
+  mutate(trump_approval = case_when(
+    q1 == &quot;Approve&quot; &amp; q1a == &quot;Very strongly&quot; ~ &quot;Strongly approve&quot;,
+    q1 == &quot;Approve&quot; &amp; q1a == &quot;Not so strongly&quot; ~ &quot;Not strongly approve&quot;,
+    q1 == &quot;Disapprove&quot; &amp; q1a == &quot;Very strongly&quot; ~ &quot;Strongly disapprove&quot;,
+    q1 == &quot;Disapprove&quot; &amp; q1a == &quot;Not so strongly&quot; ~ &quot;Not strongly disapprove&quot;,
+    q1 == &quot;Don&#39;t know/Refused (VOL.)&quot; | q1a == &quot;Don&#39;t know/Refused (VOL.)&quot; ~ &quot;Refused&quot;
+                                  ) #this parentheses closes our call to case_when
+  %&gt;% #and then sends it to fct_relevel with %&gt;% 
+    fct_relevel(&quot;Strongly approve&quot;,
+                &quot;Not strongly approve&quot;,
+                &quot;Not strongly disapprove&quot;,
+                &quot;Strongly disapprove&quot;,                             
+                &quot;Refused&quot;                
+    ) #this parentheses closes our call to fct_relevel
+  ) #this parentheses closes our call to mutate
+
+## collapse education variable into 3 categories
+Apr17 = Apr17 %&gt;% 
+  mutate(educ_cat = fct_collapse(educ2,
+          &quot;High School Grad or Less&quot; = c(
+                    &quot;Less than high school (Grades 1-8 or no formal schooling)&quot;,
+                    &quot;High school incomplete (Grades 9-11 or Grade 12 with NO diploma)&quot;,                         
+                    &quot;High school graduate (Grade 12 with diploma or GED certificate)&quot;),
+          &quot;Some college&quot; = c(
+                    &quot;Some college, no degree (includes some community college)&quot;,                                
+                    &quot;Two year associate degree from a college or university&quot;),
+           &quot;College grad+&quot; = c(
+                    &quot;Four year college or university degree/Bachelor&#39;s degree (e.g., BS, BA, AB)&quot;,              
+                    &quot;Some postgraduate or professional schooling, no postgraduate degree&quot;,                      
+                    &quot;Postgraduate or professional degree, including master&#39;s, doctorate, medical or law degree&quot;)
+                                ) #this parentheses closes our call to fct_collapse
+      ) #this parentheses closes our call to mutate
+
+##get trump_approval by education 
+trump_estimates_educ = Apr17 %&gt;% 
+  #group by education and trump approval
+  group_by(educ_cat, trump_approval) %&gt;% 
+  #calculate the total number of people in each answer and education category using survey weights (weight)
+  summarise(weighted_n = sum(weight)) %&gt;% 
+  #group by education to calculate education category size
+  group_by(educ_cat) %&gt;%
+  #add columns for total group size and the proportion
+  mutate(weighted_group_size = sum(weighted_n),
+         weighted_estimate = weighted_n/weighted_group_size)
+
+
+##select only columns interested in for this analysis
+Apr17 = Apr17 %&gt;% 
+  select(trump_approval, weight, educ_cat, racethn, gen5)
+
+##create Apr_17 long with gather
+Apr17_long = Apr17 %&gt;% 
+  #gather educ_cat, racethn, gen5 into two columns: 
+  ##a key  called &quot;subgroup variable&quot; (educ_cat, racethn, gen5)
+  ##and a value called &quot;subgroup&quot; (&quot;High School Grad or Less&quot;, &quot;Black, non-Hispanic&quot;, &quot;Millenial (1981-&quot;) 
+  gather(key = subgroup_variable, value = subgroup, educ_cat:gen5) 
+
+
+##get weighted estimates for every subgroup 
+trump_estimates = Apr17_long %&gt;% 
+  #group by subgroup_variable, subgroup, and trump approval
+  group_by(subgroup_variable, subgroup, trump_approval) %&gt;% 
+  #calculate the total number of people in each answer and education category using survey weights (weight)
+  summarise(weighted_n = sum(weight)) %&gt;% 
+  #group by subgroup only to calculate subgroup category size
+  group_by(subgroup) %&gt;%
+  #add columns for total group size and the proportion
+  mutate(weighted_group_size = sum(weighted_n),
+         weighted_estimate = weighted_n/weighted_group_size) %&gt;% 
+  #only want proportions so select out total categories
+  select(-weighted_n, -weighted_group_size) 
+
+##create plot
+trump_estimates %&gt;% 
+  filter(trump_approval != &quot;Refused&quot;) %&gt;% 
+  filter(!(subgroup %in% c(&quot;Don&#39;t know/Refused (VOL.)&quot;, &quot;DK/Ref&quot;))) %&gt;% 
+  ggplot(
+    aes(
+      x = weighted_estimate,
+      y = subgroup
+    )
+  ) +
+  geom_point() + 
+  scale_x_continuous(limits = c(0, 1),
+                     breaks = seq(0,1, by = .2),
+                     labels = scales::percent(seq(0,1, by = .2), accuracy = 1)
+  ) +
+  facet_grid(cols = vars(trump_approval),
+             rows = vars(subgroup_variable), 
+             scales = &quot;free_y&quot;,
+             space = &quot;free&quot;
+  ) +
+  theme_bw() +
+  theme(axis.title.y = element_blank())</code></pre>
+</div>
