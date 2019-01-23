@@ -1,3 +1,0 @@
-+++
-title: "things that change"
-+++
