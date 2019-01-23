@@ -3,80 +3,52 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/things_that_change/cryptocurrency-charts/</loc>
+    <loc>http://www.nickhatley.com/things_that_change/cryptocurrency-charts/</loc>
     <lastmod>2019-01-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/things/tidyverse-survey-data/</loc>
-    <lastmod>2019-01-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/about/</loc>
+    <loc>http://www.nickhatley.com/about/</loc>
     <lastmod>2018-03-07T07:51:49+01:00</lastmod>
   </url>
   
   <url>
-    <loc>/things/2015-07-23-r-rmarkdown/</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/</loc>
+    <loc>http://www.nickhatley.com/</loc>
     <lastmod>2019-01-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/blogdown/</loc>
+    <loc>http://www.nickhatley.com/tags/blogdown/</loc>
     <lastmod>2019-01-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/</loc>
+    <loc>http://www.nickhatley.com/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/plot/</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/r/</loc>
+    <loc>http://www.nickhatley.com/categories/r/</loc>
     <lastmod>2019-01-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/r-markdown/</loc>
+    <loc>http://www.nickhatley.com/tags/r-markdown/</loc>
     <lastmod>2019-01-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/regression/</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
+    <loc>http://www.nickhatley.com/tags/</loc>
     <lastmod>2019-01-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/things/</loc>
-    <lastmod>2019-01-23T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/things_that_change/</loc>
+    <loc>http://www.nickhatley.com/things_that_change/</loc>
     <lastmod>2019-01-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>

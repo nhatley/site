@@ -2,43 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R on </title>
-    <link>/categories/r/</link>
+    <link>http://www.nickhatley.com/categories/r/</link>
     <description>Recent content in R on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Wed, 23 Jan 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://www.nickhatley.com/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Crpytocurrency Charts</title>
-      <link>/things_that_change/cryptocurrency-charts/</link>
+      <link>http://www.nickhatley.com/things_that_change/cryptocurrency-charts/</link>
       <pubDate>Wed, 23 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>/things_that_change/cryptocurrency-charts/</guid>
+      <guid>http://www.nickhatley.com/things_that_change/cryptocurrency-charts/</guid>
       <description>If you aren’t keen on finance or if you are new to these kinds of charts, as I was, I’ll explain them briefly:
  Each individual bars represent a day. The low point of the bars represent the low-point for the coin that day and so forth for the high/high point. The coloring represents where the coin closed that day in respect to the prior day.</description>
-    </item>
-    
-    <item>
-      <title>Using tidyverse tools with Pew Research Center survey data in R</title>
-      <link>/things/tidyverse-survey-data/</link>
-      <pubDate>Wed, 23 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/things/tidyverse-survey-data/</guid>
-      <description>What is the “tidyverse”? R is free and open-source software that anyone can contribute to. The most common kinds of contributions are collections of R code called packages. R packages are typically hosted on The Comprehensive R Archive Network (CRAN), but can also be found on other primarily open-source code repositories like github, gitlab, or bioconductor. The ability for anyone to be able to build an R package and contribute to R’s development is a key component of R’s utility, but with so many packages (13,581 packages on CRAN as of 12/27/18), there are often many different ways to tackle the same challenge.</description>
-    </item>
-    
-    <item>
-      <title>Hello R Markdown</title>
-      <link>/things/2015-07-23-r-rmarkdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      
-      <guid>/things/2015-07-23-r-rmarkdown/</guid>
-      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
     </item>
     
   </channel>
