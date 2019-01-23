@@ -4,7 +4,6 @@ author: "Nick Hatley"
 date: "`r format(Sys.Date())`"
 output:
   blogdown::html_page
-draft: true
 categories: ["R"]
 slug: tidyverse-survey data
 ---
