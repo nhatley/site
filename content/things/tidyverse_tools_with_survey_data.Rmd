@@ -6,6 +6,7 @@ output:
   blogdown::html_page
 categories: ["R"]
 slug: tidyverse-survey data
+draft: true
 ---
 
 
