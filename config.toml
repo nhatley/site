@@ -31,19 +31,9 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [[menu.main]]
     name = "Baseball"
-    description = "Baseball"
+    description = "Place for baseball related post"
     weight = 1
     url  = "/baseball/"
-[[menu.main]]
-    name = "Things"
-    description = "Blog-style one-off posts"
-    weight = 1
-    url  = "/things/"
-[[menu.main]]
-    name = "Changing Things"
-    description = "Posts that change themseleves based on data that is updated at time intervals"
-    weight = 2
-    url  = "/things_that_change/"
 [[menu.main]]
     name = "About"
     weight = 3

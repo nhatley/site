@@ -8,11 +8,6 @@
   </url>
   
   <url>
-    <loc>/things_that_change/wrc_plus/</loc>
-    <lastmod>2019-08-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/about/</loc>
     <lastmod>2018-03-07T07:51:49+01:00</lastmod>
   </url>
@@ -54,12 +49,6 @@
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2019-08-29T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/things_that_change/</loc>
     <lastmod>2019-08-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
