@@ -10,7 +10,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 [params]
     author = "Nick Hatley"
     description = "A place for things"
-    keywords = "NBA, rstats, NHL, politics"
+    keywords = "MLB, NBA, rstats, NHL, politics"
     info = "A place for things"
 
     hideCredits = false
@@ -28,6 +28,12 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     weight = 2
     url = "https://twitter.com/nhatley/"
 
+
+[[menu.main]]
+    name = "Baseball"
+    description = "Baseball"
+    weight = 1
+    url  = "/baseball/"
 [[menu.main]]
     name = "Things"
     description = "Blog-style one-off posts"
