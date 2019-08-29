@@ -6,28 +6,27 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 25 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 29 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Crpytocurrency Charts</title>
-      <link>/things_that_change/cryptocurrency-charts/</link>
-      <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
+      <title>WRC&#43; Distributions</title>
+      <link>/baseball/wrc_plus/</link>
+      <pubDate>Thu, 29 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/things_that_change/cryptocurrency-charts/</guid>
-      <description>If you aren’t keen on finance or if you are new to these kinds of charts, as I was, I’ll explain them briefly:
- Each individual bars represent a day. The low point of the bars represent the low-point for the coin that day and so forth for the high/high point. The coloring represents where the coin closed that day in respect to the prior day.</description>
+      <guid>/baseball/wrc_plus/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>Using tidyverse tools with Pew Research Center survey data in R</title>
-      <link>/things/tidyverse-survey-data/</link>
-      <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
+      <title>WRC&#43; Distributions</title>
+      <link>/things_that_change/wrc_plus/</link>
+      <pubDate>Thu, 29 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/things/tidyverse-survey-data/</guid>
-      <description>What is the “tidyverse”? R is free and open-source software that anyone can contribute to. The most common kinds of contributions are collections of R code called packages. R packages are typically hosted on The Comprehensive R Archive Network (CRAN), but can also be found on other primarily open-source code repositories like github, gitlab, or bioconductor. The ability for anyone to be able to build an R package and contribute to R’s development is a key component of R’s utility, but with so many packages (13,581 packages on CRAN as of 12/27/18), there are often many different ways to tackle the same challenge.</description>
+      <guid>/things_that_change/wrc_plus/</guid>
+      <description></description>
     </item>
     
     <item>

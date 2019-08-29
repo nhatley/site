@@ -36,6 +36,56 @@ wrc_team = wrc %>% distinct(team_flag, team, mean_wrc_plus) %>% filter(team != "
 
 ```
 
+```{r}
+plot_theme = function (base_size = 9) {
+  theme_bw(base_size = base_size) %+replace% 
+    theme(plot.title = element_text( 
+      size = 13, 
+      margin = margin(b=4, unit = "pt"), 
+      hjust = 0, vjust = 0
+    ),
+    plot.subtitle = element_text(
+      size = 9, 
+      face = "italic", 
+      colour = "#595959", 
+      margin = margin(b = 6, unit = "pt"), 
+      hjust = 0, vjust = 0
+    ), 
+    plot.caption = element_text(
+      size = 10,
+      color = "#7F7F7F", 
+      hjust = .92, vjust = 0,
+      face = "italic"
+    ),
+    axis.title = element_text(color = "gray8", size = 10),
+    axis.text = element_text(color = "gray8", size = 9), 
+    
+    axis.line = element_line(color = "#A4A4A4", size = .2),
+    strip.text.x = element_text(color = "gray8", size = 10, margin = margin(.175,0,
+                                                                         .175,0, "cm")),
+    strip.text.y = element_text(color = "gray8", size = 10, margin = margin(0,.175,
+                                                                            0,.175, "cm")),
+    strip.background = element_rect(fill = "#f8f2e4", size = 1.2),
+    
+    #axis.ticks = element_line(color = "#A4A4A4", size = .2),
+    axis.ticks = element_blank(),
+    axis.ticks.length = unit(8, "pt"),
+    legend.title = element_blank(),
+    legend.margin=margin(0,0,0,0),
+    legend.position = "bottom",
+    legend.box.margin=margin(-5,-10, 0,-10),
+    panel.grid = element_line(color = "#A4A4A4", size = .2),
+    
+    panel.grid.major.y = element_line(linetype = "solid", color = "#A4A4A4", size = .75),
+    panel.grid.major.x = element_line(linetype = "solid", color = "#A4A4A4", size = .15),
+    panel.grid.minor.y = element_line(linetype = "dotted", color = "#A4A4A4", size = .4),
+    panel.grid.minor.x = element_line(linetype = "dotted", color = "#A4A4A4", size = .4),
+    #panel.border = element_blank(), 
+    complete = TRUE
+    )
+}
+```
+
 ```{r, fig.height=12.5, fig.width=8.5}
 wrc %>% 
   mutate(team2 = ifelse(team == "league", "league", "team")) %>% 
