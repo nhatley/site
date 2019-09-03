@@ -68,7 +68,7 @@ plot_theme = function (base_size = 9) {
 }
 ```
 
-```{r,fig.width=8.5, fig.height=7}
+```{r}
 
 #, results=FALSE
 
