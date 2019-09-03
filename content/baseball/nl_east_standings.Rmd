@@ -135,7 +135,7 @@ p = nl_east_wins %>%
     linetype = 2, colour = 'grey') + 
   geom_text(
     aes(
-      max(nl_east_wins$up_to_date) + 3,
+      max(nl_east_wins$up_to_date) + 2.5,
       label = paste(team_abbrev, " :: ", wins), hjust = 0)) + 
   scale_color_manual(values = nl_east_colors_primary) + 
   transition_reveal(up_to_date) + 
