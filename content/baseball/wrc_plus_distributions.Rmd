@@ -1,7 +1,7 @@
 ---
 title: "WRCplus Distributions"
 author: "Nick Hatley"
-date: "2019-08-28"
+date: "2019-09-03"
 output:
   blogdown::html_page
 categories: ["R"]
@@ -26,17 +26,6 @@ color_manual = c(
   "team" = "#CE1141"
 )
 
-
-##plot 
-wrc_team = wrc %>% distinct(team_flag, team, mean_wrc_plus) %>% filter(team != "league") %>% 
-  mutate(label = ifelse(team == "astros", 
-                        paste0("Mean wrc+\n", round(mean_wrc_plus, 0)),
-                        paste0(round(mean_wrc_plus, 0)))) %>% 
-  mutate(team2 = ifelse(team == "league", "league", "team"))
-
-```
-
-```{r}
 plot_theme = function (base_size = 9) {
   theme_bw(base_size = base_size) %+replace% 
     theme(plot.title = element_text( 
@@ -84,7 +73,59 @@ plot_theme = function (base_size = 9) {
     complete = TRUE
     )
 }
+
 ```
+
+Weighted Runs Created Plus or [wrc+](https://library.fangraphs.com/offense/wrc/) is a nice stat for analyzing _relative_ hitter performance for a certain year. It's relative because it is scaled to every hitter in the league. So, an average hitter has a wrc+ of 100. This makes it interesting to look at a team's wrc+ distribution to see how many good hitters they have.   
+
+You can see the league wrc+ distribution is almost exactly evenly distributed. It's not exactly even here because I've filtered this dataset I'm using down to players that have over 100 plate attempts. You can see from the first figure here that there are big bumps at the 80-90 wrc+ and 110-120 ranges. 
+
+```{r, fig.height=5.5, fig.width=8.5}
+wrc %>% 
+  mutate(team2 = ifelse(team == "league", "league", "team")) %>% 
+  mutate(team_flag = str_extract(team_flag, "^.*\\ +") %>% str_remove("\\+") %>% str_trim) %>% 
+  group_by(team_flag) %>%
+  fill(mean_wrc_plus) %>%
+  ungroup %>%
+  mutate(team_flag = paste0(team_flag, "\n", "Team wrc+ = ", round(mean_wrc_plus, 0))) %>% 
+  mutate(team_flag = fct_reorder(team_flag, -mean_wrc_plus)) %>% 
+  filter(team == "league") %>% 
+  select(-team_flag) %>% 
+  ggplot(
+    aes(
+      x = wrc_plus,
+      fill = team2
+    )
+  ) +
+  geom_density(#data = . %>% filter(team != "full"),
+    alpha = 0.25
+  ) +
+  scale_fill_manual(
+    values = color_manual
+  ) + 
+  plot_theme() +
+  facet_wrap(
+    vars(team),
+    scales = "free_x"
+  ) + 
+  scale_x_continuous(limits = c(0, 200),
+                     breaks = seq(0, 200, by = 50),
+                     labels = seq(0, 200, by = 50)
+  ) + 
+  theme(panel.grid.minor = element_blank(),
+        panel.grid.major.x = element_blank(),
+        axis.title.y = element_blank(), 
+        axis.text.y = element_blank()
+  ) +
+  labs(caption = "Players with > 100 PA's. League avg for these players is 97",
+       x = "wrc+")
+```
+
+***********
+  
+    
+    
+The next figure shows each team's wrc+ distribution densities laid over the league as a whole. The facet windows are sorted by mean wrc+ for a team. 
 
 ```{r, fig.height=12.5, fig.width=8.5}
 wrc %>% 
