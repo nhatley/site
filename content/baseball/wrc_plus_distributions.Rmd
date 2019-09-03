@@ -1,7 +1,7 @@
 ---
 title: "WRCplus Distributions"
 author: "Nick Hatley"
-date: "8/20/2019"
+date: "2019-08-28"
 output:
   blogdown::html_page
 categories: ["R"]
