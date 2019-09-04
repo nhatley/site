@@ -1,10 +1,13 @@
 baseurl = "http://www.nickhatley.com"
+title = "Nick Hatley" 
+theme = "hugo-coder" # Set the theme.
+languagecode = "en" # The site’s language code used to generate RSS.
+defaultcontentlanguage = "en" # The default content language.
 
-theme = "hugo-coder"
-
-languagecode = "en"
 
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+
+linenos = "table"
 
 
 [params]

@@ -80,7 +80,7 @@ plot_theme = function (base_size = 9) {
 
 
 
-```{r, fig.height=5.5, fig.width=12.5}
+```{r, fig.height=8.5, fig.width=12.5}
 p = barrels_15_19 %>% 
   group_by(last_name, first_name, player_id) %>% 
   summarise(attempts = sum(attempts),
@@ -129,7 +129,7 @@ p
     
 Interactive version     
   
-```{r, fig.height=5.5, fig.width=12.5}
+```{r, fig.height=8.5, fig.width=12.5}
 p_ly = plotly::ggplotly(p)
 
 p_ly
