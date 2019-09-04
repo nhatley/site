@@ -7,7 +7,10 @@ defaultcontentlanguage = "en" # The default content language.
 
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
-linenos = "table"
+pygmentsstyle = "b2"
+pygmentsnoclasses = true
+pygmentslinenos = "table"
+pygmentscodefencesguesssyntax = true
 
 
 [params]
@@ -21,7 +24,6 @@ linenos = "table"
 
     # Custom CSS
 	custom_css = []
-
 [[params.social]]
     name = "Github"
     weight = 1

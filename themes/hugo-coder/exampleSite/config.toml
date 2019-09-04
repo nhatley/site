@@ -9,7 +9,8 @@ paginate = 20
 canonifyurls = true
 
 pygmentsstyle = "b2"
-pygmentscodefences = true
+pygmentsnoclasses = true
+pygmentslinenos = "table"
 pygmentscodefencesguesssyntax = true
 
 disqusShortname = "yourdiscussshortname"
