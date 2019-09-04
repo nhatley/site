@@ -1,5 +1,5 @@
 ---
-title: "WRCplus Distributions"
+title: "WRC+ Distributions"
 author: "Nick Hatley"
 date: "2019-09-03"
 output:
@@ -78,7 +78,7 @@ plot_theme = function (base_size = 9) {
 
 Weighted Runs Created Plus or [wrc+](https://library.fangraphs.com/offense/wrc/) is a nice stat for analyzing _relative_ hitter performance for a certain year. It's relative because it is scaled to every hitter in the league. So, an average hitter has a wrc+ of 100. This makes it interesting to look at a team's wrc+ distribution to see how many good hitters they have.   
 
-You can see the league wrc+ distribution is almost exactly evenly distributed. It's not exactly even here because I've filtered this dataset I'm using down to players that have over 100 plate attempts. You can see from the first figure here that there are big bumps at the 80-90 wrc+ and 110-120 ranges. 
+You can see the league wrc+ distribution is fairly evenly distributed. It's not exactly even here because I've filtered the dataset I'm using down to players that have over 100 plate attempts. You can see from the first figure here that there are big bumps at the 80-90 wrc+ and 110-120 ranges. The mean for the set of players with > 100 attempts is 97.
 
 ```{r, fig.height=5.5, fig.width=8.5}
 wrc %>% 
@@ -123,7 +123,6 @@ wrc %>%
 
 ***********
   
-    
     
 The next figure shows each team's wrc+ distribution densities laid over the league as a whole. The facet windows are sorted by mean wrc+ for a team. 
 

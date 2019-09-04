@@ -2,32 +2,32 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R on </title>
-    <link>http://www.nickhatley.com/categories/r/</link>
+    <link>/categories/r/</link>
     <description>Recent content in R on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Tue, 03 Sep 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://www.nickhatley.com/categories/r/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>NL East Standings</title>
-      <link>http://www.nickhatley.com/baseball/nl_east/</link>
+      <title>WRC&#43; Distributions</title>
+      <link>/baseball/wrc_plus/</link>
       <pubDate>Tue, 03 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://www.nickhatley.com/baseball/nl_east/</guid>
-      <description></description>
+      <guid>/baseball/wrc_plus/</guid>
+      <description>Weighted Runs Created Plus or wrc+ is a nice stat for analyzing relative hitter performance for a certain year. It’s relative because it is scaled to every hitter in the league. So, an average hitter has a wrc+ of 100. This makes it interesting to look at a team’s wrc+ distribution to see how many good hitters they have.
+You can see the league wrc+ distribution is fairly evenly distributed. It’s not exactly even here because I’ve filtered the dataset I’m using down to players that have over 100 plate attempts.</description>
     </item>
     
     <item>
-      <title>WRCplus Distributions</title>
-      <link>http://www.nickhatley.com/baseball/wrc_plus/</link>
-      <pubDate>Tue, 03 Sep 2019 00:00:00 +0000</pubDate>
+      <title>NL East Standings</title>
+      <link>/baseball/nl_east/</link>
+      <pubDate>Mon, 02 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://www.nickhatley.com/baseball/wrc_plus/</guid>
-      <description>Weighted Runs Created Plus or wrc+ is a nice stat for analyzing relative hitter performance for a certain year. It’s relative because it is scaled to every hitter in the league. So, an average hitter has a wrc+ of 100. This makes it interesting to look at a team’s wrc+ distribution to see how many good hitters they have.
-You can see the league wrc+ distribution is almost exactly evenly distributed.</description>
+      <guid>/baseball/nl_east/</guid>
+      <description></description>
     </item>
     
   </channel>
