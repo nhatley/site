@@ -108,7 +108,7 @@ p = barrels_15_19 %>%
     colour = "#13274F", fill = "white"
   ) + 
   ggrepel::geom_text_repel(data = . %>% 
-                             filter(brl_percent > 16 | (avg_hit_angle > 20 & brl_percent > 10),
+                             filter((avg_hit_angle < 20 & brl_percent > 16) | (avg_hit_angle > 20 & brl_percent > 10)),
                           aes(
                             label = player
                           )
@@ -177,7 +177,7 @@ p = barrels_15_19 %>%
     colour = "#13274F", fill = "white"
   ) + 
   ggrepel::geom_text_repel(data = . %>% 
-                             filter(brl_percent > 16 | (avg_hit_angle > 20 & brl_percent > 10),
+                             filter((avg_hit_angle < 20 & brl_percent > 16) | (avg_hit_angle > 20 & brl_percent > 10)),
                           aes(
                             label = player
                           )
