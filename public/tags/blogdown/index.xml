@@ -17,8 +17,9 @@
       <pubDate>Tue, 03 Sep 2019 00:00:00 +0000</pubDate>
       
       <guid>/baseball/wrc_plus/</guid>
-      <description>Weighted Runs Created Plus or wrc+ is a nice stat for analyzing relative hitter performance for a certain year. It’s relative because it is scaled to every hitter in the league. So, an average hitter has a wrc+ of 100. This makes it interesting to look at a team’s wrc+ distribution to see how many good hitters they have.
-You can see the league wrc+ distribution is fairly evenly distributed. It’s not exactly even here because I’ve filtered the dataset I’m using down to players that have over 100 plate attempts.</description>
+      <description>Weighted Runs Created Plus or wrc+ is a nice stat for analyzing relative hitter performance for a certain year. It’s relative because it is scaled to every hitter in the league for that season.
+So, an average hitter has a wrc+ of 100. This makes it interesting to look at a team’s wrc+ distribution to see how many good hitters they have.
+You can see the league wrc+ distribution is fairly evenly distributed.</description>
     </item>
     
     <item>
