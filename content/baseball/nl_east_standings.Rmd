@@ -1,5 +1,5 @@
 ---
-title: "NL East Standings"
+title: "Animated NL East Standings"
 author: "Nick Hatley"
 date: "2019-09-02"
 output:
