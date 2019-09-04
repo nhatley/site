@@ -5,7 +5,7 @@ date: "2019-09-04"
 output:
   blogdown::html_page
 categories: ["R"]
-slug: wrc_plus
+slug: barrels
 
 tags: ["R Markdown", "blogdown"]
 ---
