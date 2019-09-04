@@ -122,7 +122,12 @@ p
 ```
 
 ************
-
+  
+    
+    
+    
+    
+Interactive version     
   
 ```{r, fig.height=5.5, fig.width=12.5}
 p_ly = plotly::ggplotly(p)

@@ -3,62 +3,62 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://www.nickhatley.com/baseball/barrels/</loc>
+    <loc>/baseball/barrels/</loc>
     <lastmod>2019-09-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/baseball/wrc_plus/</loc>
+    <loc>/baseball/wrc_plus/</loc>
     <lastmod>2019-09-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/baseball/nl_east/</loc>
+    <loc>/baseball/nl_east/</loc>
     <lastmod>2019-09-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/about/</loc>
+    <loc>/about/</loc>
     <lastmod>2018-03-07T07:51:49+01:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/</loc>
+    <loc>/</loc>
     <lastmod>2019-09-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/baseball/</loc>
+    <loc>/baseball/</loc>
     <lastmod>2019-09-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/tags/blogdown/</loc>
+    <loc>/tags/blogdown/</loc>
     <lastmod>2019-09-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/categories/</loc>
+    <loc>/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/categories/r/</loc>
+    <loc>/categories/r/</loc>
     <lastmod>2019-09-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/tags/r-markdown/</loc>
+    <loc>/tags/r-markdown/</loc>
     <lastmod>2019-09-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.nickhatley.com/tags/</loc>
+    <loc>/tags/</loc>
     <lastmod>2019-09-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
