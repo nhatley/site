@@ -7,10 +7,10 @@ defaultcontentlanguage = "en" # The default content language.
 
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
-pygmentsstyle = "b2"
-pygmentsnoclasses = true
-pygmentslinenos = "table"
-pygmentscodefencesguesssyntax = true
+#pygmentsstyle = "b2"
+#pygmentsnoclasses = true
+#pygmentslinenos = "table"
+#pygmentscodefencesguesssyntax = true
 
 
 [params]

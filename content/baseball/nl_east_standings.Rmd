@@ -1,7 +1,7 @@
 ---
 title: "Animated NL East Standings"
 author: "Nick Hatley"
-date: "2019-09-02"
+date: "2019-09-10"
 output:
   blogdown::html_page
 categories: ["R"]
@@ -76,7 +76,7 @@ plot_theme = function (base_size = 9) {
 #   filter(type == "file") %>% 
 #   pull(path)
 
-standings <- read_rds("../../../mlb_db/data/standings/historical/standings_thru_09_03.rds")
+standings <- read_rds("../../../mlb_db/data/standings/historical/historical_standings.rds")
 
 nl_east_wins <- standings %>% 
   filter(division == "NL East") %>% 
