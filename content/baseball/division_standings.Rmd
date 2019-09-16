@@ -46,21 +46,21 @@ divisions = standings %>%
 ## National League
 
 ### NL East
-```{r, fig.width=12.5, fig.height=7}
+```{r, fig.width=20, fig.height=10}
 standings_gif(division_in = "NL East", title = "division")
 ```
 
 **********
 
 ### NL Central
-```{r, fig.width=12.5, fig.height=7}
+```{r, fig.width=20, fig.height=10}
 standings_gif(division_in = "NL Central", title = "division")
 ```
 
 **********
 
 ### NL West
-```{r, fig.width=12.5, fig.height=7}
+```{r, fig.width=20, fig.height=10}
 standings_gif(division_in = "NL West", title = "division")
 ```
 
@@ -69,21 +69,21 @@ standings_gif(division_in = "NL West", title = "division")
 ## American League
 
 ### AL East
-```{r, fig.width=12.5, fig.height=7}
+```{r, fig.width=20, fig.height=10}
 standings_gif(division_in = "AL East", title = "division")
 ```
 
 **********
 
 ### AL Central
-```{r, fig.width=12.5, fig.height=7}
+```{r, fig.width=20, fig.height=10}
 standings_gif(division_in = "AL Central", title = "division")
 ```
 
 **********
 
 ### AL West
-```{r, fig.width=12.5, fig.height=7}
+```{r, fig.width=20, fig.height=10}
 standings_gif(division_in = "AL West", title = "division")
 ```
 
