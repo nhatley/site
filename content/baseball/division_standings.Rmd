@@ -1,0 +1,90 @@
+---
+title: "Animated Division Standings"
+author: "Nick Hatley"
+date: "2019-09-16"
+output:
+  blogdown::html_page:
+    toc: yes
+    toc_depth: 4
+categories: ["R"]
+slug: nl_east
+
+tags: ["R Markdown", "blogdown"]
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(warning =  FALSE)
+knitr::opts_chunk$set(message = FALSE)
+options(knitr.table.format = "html")
+```
+
+```{r}
+library(tidyverse)
+library(gganimate)
+
+standings <- read_rds("../../../mlb_db/data/standings/historical/standings.rds")
+tm_colors = read_csv("../../../mlb_db/reports/logos/mlb_colors.csv")
+
+source("../../../mlb_db/code/functions/standings_gif.R")
+source("../../../mlb_db/code/functions/plot_theme.R")
+
+divisions = standings %>% 
+  distinct(division, league) %>% 
+  mutate(div_order = case_when(
+    division == "NL East" ~ 1.1,
+    division == "NL Central" ~ 1.2,
+    division == "NL West" ~ 1.3,
+    division == "AL West" ~ 1.4,
+    division == "AL East" ~ 1.5,
+    division == "AL Central" ~ 1.6
+  )) %>% 
+  arrange(div_order)
+
+```
+
+
+## National League
+
+### NL East
+```{r, fig.width=12.5, fig.height=7}
+standings_gif(division_in = "NL East", title = "division")
+```
+
+**********
+
+### NL Central
+```{r, fig.width=12.5, fig.height=7}
+standings_gif(division_in = "NL Central", title = "division")
+```
+
+**********
+
+### NL West
+```{r, fig.width=12.5, fig.height=7}
+standings_gif(division_in = "NL West", title = "division")
+```
+
+**********
+
+## American League
+
+### AL East
+```{r, fig.width=12.5, fig.height=7}
+standings_gif(division_in = "AL East", title = "division")
+```
+
+**********
+
+### AL Central
+```{r, fig.width=12.5, fig.height=7}
+standings_gif(division_in = "AL Central", title = "division")
+```
+
+**********
+
+### AL West
+```{r, fig.width=12.5, fig.height=7}
+standings_gif(division_in = "AL West", title = "division")
+```
+
+**********
