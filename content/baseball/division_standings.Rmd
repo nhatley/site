@@ -1,11 +1,11 @@
 ---
 title: "Animated Division Standings"
 author: "Nick Hatley"
-date: "2019-09-16"
+date: "2019-09-15"
 output:
   blogdown::html_page
 categories: ["R"]
-slug: nl_east
+slug: division_gifs
 
 tags: ["R Markdown", "blogdown"]
 ---
