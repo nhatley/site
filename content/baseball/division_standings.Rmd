@@ -44,22 +44,28 @@ divisions = standings %>%
 ## National League
 
 ### NL East
-```{r, fig.width=20, fig.height=10}
-standings_gif(division_in = "NL East", title = "division")
+```{r, fig.width=8, fig.height=6.5, fig.show = 'animate', ffmpeg.format='gif', dev='jpeg'}
+standings_gif(division_in = "NL East",
+              renderer = "ffmpeg",  
+              title = "division")
 ```
 
 **********
 
 ### NL Central
-```{r, fig.width=20, fig.height=10}
-standings_gif(division_in = "NL Central", title = "division")
+```{r, fig.width=8, fig.height=6.5, fig.show = 'animate', ffmpeg.format='gif', dev='jpeg'}
+standings_gif(division_in = "NL Central", 
+              renderer = "ffmpeg", 
+              title = "division")
 ```
 
 **********
 
 ### NL West
-```{r, fig.width=20, fig.height=10}
-standings_gif(division_in = "NL West", title = "division")
+```{r, fig.width=8, fig.height=6.5, fig.show = 'animate', ffmpeg.format='gif', dev='jpeg'}
+standings_gif(division_in = "NL West", 
+              renderer = "ffmpeg", 
+              title = "division")
 ```
 
 **********
@@ -67,22 +73,28 @@ standings_gif(division_in = "NL West", title = "division")
 ## American League
 
 ### AL East
-```{r, fig.width=20, fig.height=10}
-standings_gif(division_in = "AL East", title = "division")
+```{r, fig.width=8, fig.height=6.5, fig.show = 'animate', ffmpeg.format='gif', dev='jpeg'}
+standings_gif(division_in = "AL East",
+              renderer = "ffmpeg", 
+              title = "division")
 ```
 
 **********
 
 ### AL Central
-```{r, fig.width=20, fig.height=10}
-standings_gif(division_in = "AL Central", title = "division")
+```{r, fig.width=8, fig.height=6.5, fig.show = 'animate', ffmpeg.format='gif', dev='jpeg'}
+standings_gif(division_in = "AL Central", 
+              renderer = "ffmpeg", 
+              title = "division")
 ```
 
 **********
 
 ### AL West
-```{r, fig.width=20, fig.height=10}
-standings_gif(division_in = "AL West", title = "division")
+```{r, fig.width=8, fig.height=6.5, fig.show = 'animate', ffmpeg.format='gif', dev='jpeg'}
+standings_gif(division_in = "AL West",
+              renderer = "ffmpeg", 
+              title = "division")
 ```
 
 **********
