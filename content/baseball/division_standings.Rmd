@@ -19,12 +19,12 @@ options(knitr.table.format = "html")
 ```{r}
 library(tidyverse)
 library(gganimate)
+mlb_db_dir <- "~/Dropbox/mlb_db/"
+standings <- read_rds(paste0(mlb_db_dir, "data/standings/historical/standings.rds"))
+tm_colors = read_csv(paste0(mlb_db_dir, "reports/logos/mlb_colors.csv"))
 
-standings <- read_rds("../../../mlb_db/data/standings/historical/standings.rds")
-tm_colors = read_csv("../../../mlb_db/reports/logos/mlb_colors.csv")
-
-source("../../../mlb_db/code/functions/standings_gif.R")
-source("../../../mlb_db/code/functions/plot_theme.R")
+source(paste0(mlb_db_dir, "code/functions/standings_gif.R"))
+source(paste0(mlb_db_dir, "code/functions/plot_theme.R"))
 
 divisions = standings %>% 
   distinct(division, league) %>% 
@@ -44,7 +44,7 @@ divisions = standings %>%
 ## National League
 
 ### NL East
-```{r, fig.width=12, fig.height=6.5, fig.show = 'animate', ffmpeg.format='gif', dev='jpeg'}
+```{r, fig.width=10, fig.height=5, fig.show = 'animate', ffmpeg.format='gif', dev='jpeg'}
 standings_gif(division_in = "NL East",
               renderer = "ffmpeg",  
               title = "division")
@@ -53,7 +53,7 @@ standings_gif(division_in = "NL East",
 **********
 
 ### NL Central
-```{r, fig.width=12, fig.height=6.5, fig.show = 'animate', ffmpeg.format='gif', dev='jpeg'}
+```{r, fig.width=10, fig.height=5, fig.show = 'animate', ffmpeg.format='gif', dev='jpeg'}
 standings_gif(division_in = "NL Central", 
               renderer = "ffmpeg", 
               title = "division")
@@ -62,7 +62,7 @@ standings_gif(division_in = "NL Central",
 **********
 
 ### NL West
-```{r, fig.width=12, fig.height=6.5, fig.show = 'animate', ffmpeg.format='gif', dev='jpeg'}
+```{r, fig.width=10, fig.height=5, fig.show = 'animate', ffmpeg.format='gif', dev='jpeg'}
 standings_gif(division_in = "NL West", 
               renderer = "ffmpeg", 
               title = "division")
@@ -73,7 +73,7 @@ standings_gif(division_in = "NL West",
 ## American League
 
 ### AL East
-```{r, fig.width=12, fig.height=6.5, fig.show = 'animate', ffmpeg.format='gif', dev='jpeg'}
+```{r, fig.width=10, fig.height=5, fig.show = 'animate', ffmpeg.format='gif', dev='jpeg'}
 standings_gif(division_in = "AL East",
               renderer = "ffmpeg", 
               title = "division")
@@ -82,7 +82,7 @@ standings_gif(division_in = "AL East",
 **********
 
 ### AL Central
-```{r, fig.width=12, fig.height=6.5, fig.show = 'animate', ffmpeg.format='gif', dev='jpeg'}
+```{r, fig.width=10, fig.height=5, fig.show = 'animate', ffmpeg.format='gif', dev='jpeg'}
 standings_gif(division_in = "AL Central", 
               renderer = "ffmpeg", 
               title = "division")
@@ -91,7 +91,7 @@ standings_gif(division_in = "AL Central",
 **********
 
 ### AL West
-```{r, fig.width=12, fig.height=6.5, fig.show = 'animate', ffmpeg.format='gif', dev='jpeg'}
+```{r, fig.width=10, fig.height=5, fig.show = 'animate', ffmpeg.format='gif', dev='jpeg'}
 standings_gif(division_in = "AL West",
               renderer = "ffmpeg", 
               title = "division")
