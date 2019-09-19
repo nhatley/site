@@ -1,13 +1,13 @@
 ---
 title: "WRC+ Distributions"
 author: "Nick Hatley"
-date: "2019-09-03"
+date: "2019-09-18"
 output:
   blogdown::html_page
 categories: ["R"]
 slug: wrc_plus
 
-tags: ["R Markdown", "blogdown"]
+tags: ["wrc plus", "hitting"]
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
@@ -19,70 +19,23 @@ options(knitr.table.format = "html")
 
 ```{r get librarys, function and data}
 library(tidyverse)
-wrc <- read_rds("../../../mlb_db/output/wrc_plus.rds")
-
+mlb_db_dir = "~/Dropbox/mlb_db/"
+wrc <- read_rds(paste0(mlb_db_dir, "output/wrc_plus.rds"))
+source(paste0(mlb_db_dir, "code/functions/plot_theme.R"))
 color_manual = c(
   "league" = "gray54",
   "team" = "#CE1141"
 )
-
-plot_theme = function (base_size = 9) {
-  theme_bw(base_size = base_size) %+replace% 
-    theme(plot.title = element_text( 
-      size = 13, 
-      margin = margin(b=4, unit = "pt"), 
-      hjust = 0, vjust = 0
-    ),
-    plot.subtitle = element_text(
-      size = 9, 
-      face = "italic", 
-      colour = "#595959", 
-      margin = margin(b = 6, unit = "pt"), 
-      hjust = 0, vjust = 0
-    ), 
-    plot.caption = element_text(
-      size = 10,
-      color = "#7F7F7F", 
-      hjust = .92, vjust = 0,
-      face = "italic"
-    ),
-    axis.title = element_text(color = "gray8", size = 10),
-    axis.text = element_text(color = "gray8", size = 9), 
-    
-    axis.line = element_line(color = "#A4A4A4", size = .2),
-    strip.text.x = element_text(color = "gray8", size = 10, margin = margin(.175,0,
-                                                                         .175,0, "cm")),
-    strip.text.y = element_text(color = "gray8", size = 10, margin = margin(0,.175,
-                                                                            0,.175, "cm")),
-    strip.background = element_rect(fill = "#f8f2e4", size = 1.2),
-    
-    #axis.ticks = element_line(color = "#A4A4A4", size = .2),
-    axis.ticks = element_blank(),
-    axis.ticks.length = unit(8, "pt"),
-    legend.title = element_blank(),
-    legend.margin=margin(0,0,0,0),
-    legend.position = "bottom",
-    legend.box.margin=margin(-5,-10, 0,-10),
-    panel.grid = element_line(color = "#A4A4A4", size = .2),
-    
-    panel.grid.major.y = element_line(linetype = "solid", color = "#A4A4A4", size = .75),
-    panel.grid.major.x = element_line(linetype = "solid", color = "#A4A4A4", size = .15),
-    panel.grid.minor.y = element_line(linetype = "dotted", color = "#A4A4A4", size = .4),
-    panel.grid.minor.x = element_line(linetype = "dotted", color = "#A4A4A4", size = .4),
-    #panel.border = element_blank(), 
-    complete = TRUE
-    )
-}
-
 ```
 
 Weighted Runs Created Plus or [wrc+](https://library.fangraphs.com/offense/wrc/) is a nice stat for analyzing _relative_ hitter performance for a certain year. It's relative because it is scaled to every hitter in the league for that season. 
   
 So, an average hitter has a wrc+ of 100. This makes it interesting to look at a team's wrc+ distribution to see how many good hitters they have.   
 
-You can see the league wrc+ distribution is fairly evenly distributed. It's not exactly even here because I've filtered the dataset I'm using down to players that have over 100 plate attempts. You can see from the first figure here that there are big bumps at the 80-90 wrc+ and 110-120 ranges. The mean for the set of players with >100 attempts is 97.
+You can see the league wrc+ distribution is fairly evenly distributed. It's not exactly even here because I've filtered the dataset I'm using down to players that have over 100 plate attempts. You can see from the first figure here that there are big bumps at the 80-90 wrc+ and 110-120 ranges. The mean for the set of players with >100 attempts is 97.  
 
-```{r, fig.height=5.5, fig.width=12.5}
+```{r, out.width = "45%", out.height= "35%", fig.align='center'}
+
 wrc %>% 
   mutate(team2 = ifelse(team == "league", "league", "team")) %>% 
   mutate(team_flag = str_extract(team_flag, "^.*\\ +") %>% str_remove("\\+") %>% str_trim) %>% 
@@ -127,10 +80,12 @@ wrc %>%
 
 ***********
   
-A couple things stand out to me. Take the Astros and Yankees. The Astros have a hump at around 80 or so wrc+, but over half their team is >100 and is pretty evenly distributed up to the 150 or so range. The number of >150 wrc+ hitters in their lineup is unheard of across the league and is a big reason why they lead the league with the team average of 122. The Yankees on, the other hand, have almost no 150 or higher wrc+ hitters, but almost all of their hitters are above league average. 
-
-
-```{r, fig.height=5.5, fig.width=12.5}
+  
+A couple things stand out to me. Take the Astros and Yankees. The Astros have a hump at around 80 or so wrc+, but over half their team is >100 and is pretty evenly distributed up to the 150 or so range. The number of >150 wrc+ hitters in their lineup is unheard of across the league and is a big reason why they lead the league with the team average of 122. The Yankees on, the other hand, have almost no 150 or higher wrc+ hitters, but almost all of their hitters are above league average.   
+  
+  
+***********
+```{r, out.width = "60%", out.height= "40%", fig.align='center'}
 wrc %>% 
   mutate(team2 = ifelse(team == "league", "league", "team")) %>% 
   mutate(team_flag = str_extract(team_flag, "^.*\\ +") %>% str_remove("\\+") %>% str_trim) %>% 
@@ -139,7 +94,7 @@ wrc %>%
   ungroup %>%
   mutate(team_flag = paste0(team_flag, "\n", "Team wrc+ = ", round(mean_wrc_plus, 0))) %>% 
   mutate(team_flag = fct_reorder(team_flag, -mean_wrc_plus)) %>% 
-  filter(team_flag %in% c("astros\nTeam wrc+ = 122", "yankees\nTeam wrc+ = 117")) %>% 
+  filter(str_detect(team_flag, "astros") | str_detect(team_flag, "yankees")) %>% 
   ggplot(
     aes(
       x = wrc_plus,
@@ -176,7 +131,7 @@ wrc %>%
 
 Next is a set of teams in the top-end to middle of the pack: the Braves, Nationals, and Diamondbacks. They each get to the 100 wrc+ range kinda differently. The Braves are well represented in terms of average hitters but have slightly higher representation in the 125+ range. The Nationals have a big hump at the 90 range, and then almost no 120 or so hitters, but then have a couple hitters at the 150+ range. The Diamondbacks fall almost exactly on the league wide distributions with fewer hitters on the tails and higher concentration of average hitters.
 
-```{r, fig.height=5.5, fig.width=12.5}
+```{r, out.width = "50%", out.height= "25%", fig.align='center'}
 wrc %>% 
   mutate(team2 = ifelse(team == "league", "league", "team")) %>% 
   mutate(team_flag = str_extract(team_flag, "^.*\\ +") %>% str_remove("\\+") %>% str_trim) %>% 
@@ -185,9 +140,9 @@ wrc %>%
   ungroup %>%
   mutate(team_flag = paste0(team_flag, "\n", "Team wrc+ = ", round(mean_wrc_plus, 0))) %>% 
   mutate(team_flag = fct_reorder(team_flag, -mean_wrc_plus)) %>% 
-  filter(team_flag %in% c("braves\nTeam wrc+ = 103",
-                          "nationals\nTeam wrc+ = 102",
-                          "diamondbacks\nTeam wrc+ = 101")) %>% 
+  filter(str_detect(team_flag, "braves") | 
+           str_detect(team_flag, "nationals") |
+              str_detect(team_flag, "diamondbacks")) %>%
   ggplot(
     aes(
       x = wrc_plus,
@@ -225,7 +180,10 @@ wrc %>%
 Here's every team in the league: 
 
 
-```{r, fig.height=12.5, fig.width=12.5}
+``````{r, fig.height=12.5, fig.width=12.5}
+
+
+
 wrc %>% 
   mutate(team2 = ifelse(team == "league", "league", "team")) %>% 
   mutate(team_flag = str_extract(team_flag, "^.*\\ +") %>% str_remove("\\+") %>% str_trim) %>% 
