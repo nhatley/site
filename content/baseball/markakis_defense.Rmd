@@ -1,0 +1,122 @@
+---
+title: "Nick Markakis' Defense is Really Bad"
+author: "Nick Hatley"
+date: "2019-11-25"
+output:
+  blogdown::html_page
+categories: ["R"]
+slug: wrc_plus
+
+tags: ["mlb", "defense"]
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(warning =  FALSE)
+knitr::opts_chunk$set(message = FALSE)
+options(knitr.table.format = "html")
+```
+
+
+```{r get librarys, function and data}
+library(tidyverse)
+mlb_db_dir = "~/Dropbox/mlb/"
+outfielders <- read_rds(paste0(mlb_db_dir, "output/outfielders_value.rds"))
+source(paste0(mlb_db_dir, "code/functions/plot_theme.R"))
+
+```
+
+Nick Markakis' defense is **really, really** bad.   
+  
+That's it, that's the post.
+
+  
+*************  
+```{r, fig.height=14, fig.width=12.5, fig.align='center'}
+
+outfielders %>% 
+  mutate(markakis = name == "Nick Markakis") %>% 
+  mutate(first_initial = str_extract(first_name, "^..")) %>% 
+  mutate(name_label = paste0(first_initial, ". ", last_name)) %>%  
+  ggplot(
+    aes(
+      x = reorder(name, def_per_pa),
+      y = def_per_pa
+    )
+  ) +
+  geom_col(
+    aes(
+      x = reorder(name, def_per_pa),
+      y = def_per_pa,
+      fill = markakis
+      )
+  ) + 
+  geom_segment(
+      data = . %>% filter(name == "Nick Markakis"),
+        aes(
+          x = 30,
+          xend = name,
+          y = .01,
+          yend = .0001
+        ),
+      arrow = arrow(length = unit(0.03, "npc"))
+  ) + 
+  annotate("text",
+           x = 33, 
+           y = .01, 
+           label =
+             "Markakis had the 8th worst\noutfield defensive value last year") +
+  coord_flip() + 
+  plot_theme() + 
+  labs(y = "Defensive Value per Plate Attempt") + 
+  ggtitle("Nick Markakis' defense was really really bad in 2019", 
+          subtitle = "Among OF with >200 plate attempts") + 
+  theme(legend.position = 'none',
+        axis.title.y = element_blank(), 
+        axis.text.y = element_text(size = rel(.85)),
+        plot.subtitle = element_text(face = "italic"),
+        panel.grid.minor.y = element_blank(),
+        panel.grid.major.y = element_blank()
+  )   
+  
+  
+```
+
+***********
+  
+  
+A couple things stand out to me. Take the Astros and Yankees. The Astros have a hump at around 80 or so wrc+, but over half their team is >100 and is pretty evenly distributed up to the 150 or so range. The number of >150 wrc+ hitters in their lineup is unheard of across the league and is a big reason why they lead the league with the team average of 122. The Yankees on, the other hand, have almost no 150 or higher wrc+ hitters, but almost all of their hitters are above league average.   
+  
+  
+***********
+```{r, out.width = "60%", out.height= "40%", fig.align='center'}
+p = outfielders %>% 
+  mutate(markakis = name == "Nick Markakis") %>% 
+  
+  ggplot(
+    aes(
+      x = off,
+      y = def
+    )
+  ) +
+  geom_point(
+    aes(
+    text = name,
+    color = markakis
+    )
+  ) +
+  geom_vline(xintercept = 0) + 
+  geom_hline(yintercept = 0) + 
+  theme_bw() + 
+  theme(legend.position = 'none') + 
+  labs(x = "Offensive Value",
+       y = "Defensive Value"
+       )
+
+
+p_ly = plotly::ggplotly(p, tooltip = c("text", "x", "y"), width = 1300, height = 550)
+
+p_ly
+```
+
+***********  
+

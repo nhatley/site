@@ -18,7 +18,7 @@ options(knitr.table.format = "html")
 
 ```{r get librarys, function and data}
 library(tidyverse)
-mlb_db_dir = "~/Dropbox/mlb_db/"
+mlb_db_dir = "~/Dropbox/mlb/"
 
 source(paste0(mlb_db_dir, "code/functions/plot_theme.R"))
 

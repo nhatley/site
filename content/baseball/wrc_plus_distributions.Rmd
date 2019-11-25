@@ -19,7 +19,7 @@ options(knitr.table.format = "html")
 
 ```{r get librarys, function and data}
 library(tidyverse)
-mlb_db_dir = "~/Dropbox/mlb_db/"
+mlb_db_dir = "~/Dropbox/mlb/"
 wrc <- read_rds(paste0(mlb_db_dir, "output/wrc_plus.rds"))
 source(paste0(mlb_db_dir, "code/functions/plot_theme.R"))
 color_manual = c(

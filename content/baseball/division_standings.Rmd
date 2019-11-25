@@ -19,7 +19,7 @@ options(knitr.table.format = "html")
 ```{r}
 library(tidyverse)
 library(gganimate)
-mlb_db_dir <- "~/Dropbox/mlb_db/"
+mlb_db_dir <- "~/Dropbox/mlb/"
 standings <- read_rds(paste0(mlb_db_dir, "data/standings/historical/standings.rds"))
 tm_colors = read_csv(paste0(mlb_db_dir, "reports/logos/mlb_colors.csv"))
 

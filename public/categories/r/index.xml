@@ -6,10 +6,21 @@
     <description>Recent content in R on Nick Hatley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 18 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 25 Nov 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://www.nickhatley.com/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Nick Markakis&#39; Defense is Really Bad</title>
+      <link>http://www.nickhatley.com/baseball/wrc_plus/</link>
+      <pubDate>Mon, 25 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.nickhatley.com/baseball/wrc_plus/</guid>
+      <description>Nick Markakis’ defense is really, really bad.
+That’s it, that’s the post.
+A couple things stand out to me. Take the Astros and Yankees. The Astros have a hump at around 80 or so wrc+, but over half their team is &amp;gt;100 and is pretty evenly distributed up to the 150 or so range. The number of &amp;gt;150 wrc+ hitters in their lineup is unheard of across the league and is a big reason why they lead the league with the team average of 122.</description>
+    </item>
     
     <item>
       <title>WRC&#43; Distributions</title>
@@ -40,7 +51,7 @@ You can see the league wrc+ distribution is fairly evenly distributed.</descript
       <description>Data from this post retreived via the fabulous baseballr package from Bill Petti.
 It has a number of data acquisition and other functions. Here, I used the baseballr::scrape_savant_leaderboards() function to fetch data from the MLB’s baseball savant website for exit velocity as measured by Statcast.
 The resulting dataset looks like:
-barrels_15_19 %&amp;gt;% glimpse() ## Observations: 2,359 ## Variables: 19 ## $ year &amp;lt;int&amp;gt; 2015, 2015, 2015, 2015, 2015, 2015, 2015, … ## $ last_name &amp;lt;chr&amp;gt; &amp;quot;Stanton&amp;quot;, &amp;quot;Cruz&amp;quot;, &amp;quot;Trout&amp;quot;, &amp;quot;Gonzalez&amp;quot;, &amp;quot;R… ## $ first_name &amp;lt;chr&amp;gt; &amp;quot;Giancarlo&amp;quot;, &amp;quot;Nelson&amp;quot;, &amp;quot;Mike&amp;quot;, &amp;quot;Carlos&amp;quot;, &amp;quot;… ## $ player_id &amp;lt;dbl&amp;gt; 519317, 443558, 545361, 471865, 434670, 12… ## $ attempts &amp;lt;dbl&amp;gt; 187, 427, 422, 428, 334, 385, 377, 445, 24… ## $ avg_hit_angle &amp;lt;dbl&amp;gt; 15.</description>
+barrels_15_19 %&amp;gt;% glimpse() ## Observations: 2,375 ## Variables: 19 ## $ year &amp;lt;int&amp;gt; 2015, 2015, 2015, 2015, 2015, 2015, 2015, … ## $ last_name &amp;lt;chr&amp;gt; &amp;quot;Stanton&amp;quot;, &amp;quot;Cruz&amp;quot;, &amp;quot;Trout&amp;quot;, &amp;quot;Gonzalez&amp;quot;, &amp;quot;R… ## $ first_name &amp;lt;chr&amp;gt; &amp;quot;Giancarlo&amp;quot;, &amp;quot;Nelson&amp;quot;, &amp;quot;Mike&amp;quot;, &amp;quot;Carlos&amp;quot;, &amp;quot;… ## $ player_id &amp;lt;dbl&amp;gt; 519317, 443558, 545361, 471865, 434670, 12… ## $ attempts &amp;lt;dbl&amp;gt; 187, 427, 422, 428, 334, 385, 377, 445, 24… ## $ avg_hit_angle &amp;lt;dbl&amp;gt; 15.</description>
     </item>
     
   </channel>
