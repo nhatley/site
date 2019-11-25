@@ -2,93 +2,93 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Nick Hatley</title>
-    <link>/tags/</link>
+    <link>http://www.nickhatley.com/tags/</link>
     <description>Recent content in Tags on Nick Hatley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Mon, 25 Nov 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://www.nickhatley.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>defense</title>
-      <link>/tags/defense/</link>
+      <link>http://www.nickhatley.com/tags/defense/</link>
       <pubDate>Mon, 25 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/defense/</guid>
+      <guid>http://www.nickhatley.com/tags/defense/</guid>
       <description></description>
     </item>
     
     <item>
       <title>mlb</title>
-      <link>/tags/mlb/</link>
+      <link>http://www.nickhatley.com/tags/mlb/</link>
       <pubDate>Mon, 25 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/mlb/</guid>
+      <guid>http://www.nickhatley.com/tags/mlb/</guid>
       <description></description>
     </item>
     
     <item>
       <title>hitting</title>
-      <link>/tags/hitting/</link>
+      <link>http://www.nickhatley.com/tags/hitting/</link>
       <pubDate>Wed, 18 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/hitting/</guid>
+      <guid>http://www.nickhatley.com/tags/hitting/</guid>
       <description></description>
     </item>
     
     <item>
       <title>wrc plus</title>
-      <link>/tags/wrc-plus/</link>
+      <link>http://www.nickhatley.com/tags/wrc-plus/</link>
       <pubDate>Wed, 18 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/wrc-plus/</guid>
+      <guid>http://www.nickhatley.com/tags/wrc-plus/</guid>
       <description></description>
     </item>
     
     <item>
       <title>blogdown</title>
-      <link>/tags/blogdown/</link>
+      <link>http://www.nickhatley.com/tags/blogdown/</link>
       <pubDate>Sun, 15 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/blogdown/</guid>
+      <guid>http://www.nickhatley.com/tags/blogdown/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R Markdown</title>
-      <link>/tags/r-markdown/</link>
+      <link>http://www.nickhatley.com/tags/r-markdown/</link>
       <pubDate>Sun, 15 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/r-markdown/</guid>
+      <guid>http://www.nickhatley.com/tags/r-markdown/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Barrels</title>
-      <link>/tags/barrels/</link>
+      <link>http://www.nickhatley.com/tags/barrels/</link>
       <pubDate>Wed, 04 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/barrels/</guid>
+      <guid>http://www.nickhatley.com/tags/barrels/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Exit Velocity</title>
-      <link>/tags/exit-velocity/</link>
+      <link>http://www.nickhatley.com/tags/exit-velocity/</link>
       <pubDate>Wed, 04 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/exit-velocity/</guid>
+      <guid>http://www.nickhatley.com/tags/exit-velocity/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Statcast</title>
-      <link>/tags/statcast/</link>
+      <link>http://www.nickhatley.com/tags/statcast/</link>
       <pubDate>Wed, 04 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/statcast/</guid>
+      <guid>http://www.nickhatley.com/tags/statcast/</guid>
       <description></description>
     </item>
     

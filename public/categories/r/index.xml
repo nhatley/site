@@ -2,32 +2,49 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R on Nick Hatley</title>
-    <link>/categories/r/</link>
+    <link>http://www.nickhatley.com/categories/r/</link>
     <description>Recent content in R on Nick Hatley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Mon, 25 Nov 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://www.nickhatley.com/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Nick Markakis&#39; Defense is Really Bad</title>
-      <link>/baseball/markakis_defense/</link>
+      <link>http://www.nickhatley.com/baseball/markakis_defense/</link>
       <pubDate>Mon, 25 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>/baseball/markakis_defense/</guid>
+      <guid>http://www.nickhatley.com/baseball/markakis_defense/</guid>
       <description>Nick Markakis’ defense is really, really bad.
 That’s it, that’s the post.
-A couple things stand out to me. Take the Astros and Yankees. The Astros have a hump at around 80 or so wrc+, but over half their team is &amp;gt;100 and is pretty evenly distributed up to the 150 or so range. The number of &amp;gt;150 wrc+ hitters in their lineup is unheard of across the league and is a big reason why they lead the league with the team average of 122.</description>
+His offense isn’t really that great either.
+ {&#34;x&#34;:{&#34;data&#34;:[{&#34;x&#34;:[5.6,0.7,23.9,-3.6,-2,-10.9,-18.1,-5.8,7.4,3.1,7.2,-1.6,7.3,30.9,-6.6,4.5,-2.9,-17.2,-7.6,6.7,15.5,7.5,22.8,21.9,7.6,10,-7.9,16.9,65.3,-12.1,1.2,-20.4,11.6,6.1,1.9,-9.5,1.7,4.8,-9.4,2.7,12.3,0.6,5.8,40.7,-5.3,-11.4,-4.2,-3.7,-9.6,14.6,-1.6,-6.8,-2.6,4.5,-3.4,-9.5,2.7,2.8,18.4,19.3,13.7,-4,-4.2,-4.1,-15.5,35.7,-3,-10.2,-3.2,4.6,13.7,-12.8,-7.6,-25.7,-12.6,-10.5,-5.2,9.1,28,9,14.5,-9.8,27.2,23.6,11.9,68.2,12.9,2.7,36.7,18.3,-5.9,-3.6,0.6,1.1,-16.7,20.4,-11.9,-7.6,33.1,-8.5,14.1,17.8,-3.1,-14.4,1.9,2.4,18.7,-0.7,-0.6,-2.8,2.2,-0.4],&#34;y&#34;:[-7.2,1.3,7.3,3.6,3.6,-6.7,-1.2,-3.3,2.9,-4.9,-0.3,-5.3,-4.2,-10,-0.5,-4.6,1.3,9.9,-2.4,-1.4,3.2,-3.7,-7.6,3.4,9.8,-2.6,3.4,-16.6,-3.7,-13.4,-8.9,-5.7,-8.8,-5,2,2.8,-4.1,-22.4,-12.5,-10.4,-10.8,1.5,-7.2,6.2,0.2,2.9,-1,-7.3,13.3,-7.1,5.1,1.2,-11.4,-3.2,4.2,8.1,-1.5,-5.1,-3.6,3.7,-0.4,-6.2,-5.5,-1.5,-1.6,-8.3,-8.2,8.5,1,-1.3,-6.4,-2.3,-2,0.5,9.7,-9.4,7.3,-0.6,-3.5,-3.6,9.9,-10.6,-6.8,-5.6,4.2,-0.4,-3.4,-1.3,6.7,-12.5,0.3,-8.1,-0.3,-3.5,-7.4,1.5,-4.4,-1.1,1.7,-2.8,-19.1,-5.4,-5,0.4,-5.2,-1.3,-6.6,6,5.9,8.8,-8.7,-6.9],&#34;text&#34;:[&#34;A.J. Pollock
+off: 5.6
+def: -7.2&#34;,&#34;Aaron Hicks
+off: 0.7
+def: 1.3&#34;,&#34;Aaron Judge
+off: 23.9
+def: 7.3&#34;,&#34;Adam Engel
+off: -3.6
+def: 3.6&#34;,&#34;Adam Haseley
+off: -2.0
+def: 3.6&#34;,&#34;Adam Jones
+off: -10.9
+def: -6.7&#34;,&#34;Albert Almora Jr.
+off: -18.1
+def: -1.2&#34;,&#34;Alex Gordon
+off: -5.8
+def: -3.3&#34;,&#34;Alex Verdugo</description>
     </item>
     
     <item>
       <title>WRC&#43; Distributions</title>
-      <link>/baseball/wrc_plus/</link>
+      <link>http://www.nickhatley.com/baseball/wrc_plus/</link>
       <pubDate>Wed, 18 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/baseball/wrc_plus/</guid>
+      <guid>http://www.nickhatley.com/baseball/wrc_plus/</guid>
       <description>Weighted Runs Created Plus or wrc+ is a nice stat for analyzing relative hitter performance for a certain year. It’s relative because it is scaled to every hitter in the league for that season.
 So, an average hitter has a wrc+ of 100. This makes it interesting to look at a team’s wrc+ distribution to see how many good hitters they have.
 You can see the league wrc+ distribution is fairly evenly distributed.</description>
@@ -35,19 +52,19 @@ You can see the league wrc+ distribution is fairly evenly distributed.</descript
     
     <item>
       <title>Animated Division Standings</title>
-      <link>/baseball/division_gifs/</link>
+      <link>http://www.nickhatley.com/baseball/division_gifs/</link>
       <pubDate>Sun, 15 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/baseball/division_gifs/</guid>
+      <guid>http://www.nickhatley.com/baseball/division_gifs/</guid>
       <description> National League NL East   NL Central   NL West   NL Wild Card   NL Overall    American League AL East   AL Central   AL West   AL Wild Card   AL Overall    </description>
     </item>
     
     <item>
       <title>Barrel percent by launch angle</title>
-      <link>/baseball/barrels/</link>
+      <link>http://www.nickhatley.com/baseball/barrels/</link>
       <pubDate>Wed, 04 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/baseball/barrels/</guid>
+      <guid>http://www.nickhatley.com/baseball/barrels/</guid>
       <description>Data from this post retreived via the fabulous baseballr package from Bill Petti.
 It has a number of data acquisition and other functions. Here, I used the baseballr::scrape_savant_leaderboards() function to fetch data from the MLB’s baseball savant website for exit velocity as measured by Statcast.
 The resulting dataset looks like:

@@ -83,9 +83,8 @@ outfielders %>%
 
 ***********
   
-  
-A couple things stand out to me. Take the Astros and Yankees. The Astros have a hump at around 80 or so wrc+, but over half their team is >100 and is pretty evenly distributed up to the 150 or so range. The number of >150 wrc+ hitters in their lineup is unheard of across the league and is a big reason why they lead the league with the team average of 122. The Yankees on, the other hand, have almost no 150 or higher wrc+ hitters, but almost all of their hitters are above league average.   
-  
+His offense isn't really that great either.    
+
   
 ***********
 ```{r, out.width = "60%", out.height= "40%", fig.align='center'}

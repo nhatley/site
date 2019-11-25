@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R Markdown on Nick Hatley</title>
-    <link>/tags/r-markdown/</link>
+    <link>http://www.nickhatley.com/tags/r-markdown/</link>
     <description>Recent content in R Markdown on Nick Hatley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sun, 15 Sep 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/r-markdown/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://www.nickhatley.com/tags/r-markdown/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Animated Division Standings</title>
-      <link>/baseball/division_gifs/</link>
+      <link>http://www.nickhatley.com/baseball/division_gifs/</link>
       <pubDate>Sun, 15 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/baseball/division_gifs/</guid>
+      <guid>http://www.nickhatley.com/baseball/division_gifs/</guid>
       <description> National League NL East   NL Central   NL West   NL Wild Card   NL Overall    American League AL East   AL Central   AL West   AL Wild Card   AL Overall    </description>
     </item>
     
