@@ -5,7 +5,7 @@ date: "2019-11-25"
 output:
   blogdown::html_page
 categories: ["R"]
-slug: wrc_plus
+slug: markakis_defense
 
 tags: ["mlb", "defense"]
 ---
