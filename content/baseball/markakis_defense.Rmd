@@ -87,7 +87,7 @@ His offense isn't really that great either.
 
   
 ***********
-```{r, out.width = "60%", out.height= "40%", fig.align='center'}
+```{r, out.width = "10%", out.height= "40%", fig.align='left'}
 p = outfielders %>% 
   mutate(markakis = name == "Nick Markakis") %>% 
   
