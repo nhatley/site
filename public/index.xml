@@ -6,10 +6,19 @@
     <description>Recent content on Nick Hatley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 25 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 23 Mar 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://www.nickhatley.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Exit Velo Boxplots</title>
+      <link>http://www.nickhatley.com/baseball/exit_velo_boxplots/</link>
+      <pubDate>Tue, 23 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.nickhatley.com/baseball/exit_velo_boxplots/</guid>
+      <description>  NL East NL Central NL West AL East AL Central AL West </description>
+    </item>
     
     <item>
       <title>Nick Markakis&#39; Defense is Really Bad</title>
