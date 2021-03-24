@@ -18,29 +18,6 @@ options(knitr.table.format = "html")
 
 ```{r get librarys, function and data}
 library(tidyverse)
-make_season_ev_boxplot_by_player <- function(.data){
-  .data %>% 
-    ggplot(aes(x = season,
-               y = launch_speed,
-               group = season)) + 
-    geom_boxplot(color = '#13274F', fill = "#f8f2e4", alpha = .5) +  
-    ggforce::facet_row(vars(player_name_lbl)) + 
-    plot_theme_facet_grid() +
-    scale_y_continuous(limits = c(25, 125),
-                       breaks = c(seq(25, 75, by = 25), seq(85, 115, by = 5)),
-                       labels = c(seq(25, 75, by = 25), seq(85, 115, by = 5))) + 
-    scale_x_continuous(breaks = seq(2015, 2020, by = 1),
-                       labels = c('2015', "'16", "'17", "'18", "'19", "2020")) + 
-    ggtitle("Exit Velocity Seasons 2015 - 2020") + 
-    theme(panel.grid.minor = element_blank(),
-          panel.grid.major.x = element_blank(),
-          panel.grid.major.y = element_line(color = "#A4A4A4", 
-                                            size = .4, linetype = 'dotted'),
-          axis.title = element_blank(), 
-          strip.text = element_text(face = 'bold'))
-  
-}
-
 
 mlb_db_dir = "~/Dropbox/mlb/"
 p_tables <- read_rds(paste0(mlb_db_dir, 'output/plots/exit_velocity/p_tables_2020.rds'))
@@ -51,6 +28,8 @@ divs = bats_ids %>% arrange(div_order) %>% distinct(division) %>% pull(division)
 source(paste0(mlb_db_dir, "code/functions/plot_theme.R"))
 ```
 
+## How to read these graphs
+  
 ```{r, fig.align='center', fig.height=3.25, fig.width=9.5}
 example_bx <- p_tables %>% 
   filter(mlbam_id_batter == 645277) %>% 
@@ -60,8 +39,7 @@ example_bx <- p_tables %>%
          max_launch_speed = max(launch_speed, na.rm = T)
   ) %>% 
   ungroup %>% 
-  select(player_name, launch_speed, median_launch_speed, max_launch_speed) %>% 
-  mutate(team = "How to Read This Graph", team_order = 6)
+  select(player_name, launch_speed, median_launch_speed, max_launch_speed) 
 
 example_bx %>% 
   ggplot(aes(x = reorder(player_name, -max_launch_speed),
