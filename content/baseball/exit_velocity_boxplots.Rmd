@@ -1,0 +1,170 @@
+---
+title: "Exit Velo Boxplots"
+author: "Nick Hatley"
+date: "2021-03-23"
+output:
+  blogdown::html_page
+categories: ["R"]
+slug: exit_velo_boxplots
+tags: [ "hitting", "statcast", "exit velocity"]
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(warning =  FALSE)
+knitr::opts_chunk$set(message = FALSE)
+options(knitr.table.format = "html")
+```
+
+
+```{r get librarys, function and data}
+library(tidyverse)
+make_season_ev_boxplot_by_player <- function(.data){
+  .data %>% 
+    ggplot(aes(x = season,
+               y = launch_speed,
+               group = season)) + 
+    geom_boxplot(color = '#13274F', fill = "#f8f2e4", alpha = .5) +  
+    ggforce::facet_row(vars(player_name_lbl)) + 
+    plot_theme_facet_grid() +
+    scale_y_continuous(limits = c(25, 125),
+                       breaks = c(seq(25, 75, by = 25), seq(85, 115, by = 5)),
+                       labels = c(seq(25, 75, by = 25), seq(85, 115, by = 5))) + 
+    scale_x_continuous(breaks = seq(2015, 2020, by = 1),
+                       labels = c('2015', "'16", "'17", "'18", "'19", "2020")) + 
+    ggtitle("Exit Velocity Seasons 2015 - 2020") + 
+    theme(panel.grid.minor = element_blank(),
+          panel.grid.major.x = element_blank(),
+          panel.grid.major.y = element_line(color = "#A4A4A4", 
+                                            size = .4, linetype = 'dotted'),
+          axis.title = element_blank(), 
+          strip.text = element_text(face = 'bold'))
+  
+}
+
+
+mlb_db_dir = "~/Dropbox/mlb/"
+p_tables <- read_rds(paste0(mlb_db_dir, 'output/plots/exit_velocity/p_tables.rds'))
+bats_ids <- read_rds(paste0(mlb_db_dir, 'output/plots/exit_velocity/bats_ids.rds'))
+
+
+divs = bats_ids %>% arrange(div_order) %>% distinct(division) %>% pull(division)
+source(paste0(mlb_db_dir, "code/functions/plot_theme.R"))
+```
+
+
+```{r, out.width = "45%", out.height= "35%", fig.align='center'}
+walk(divs, function(div_in){
+  
+  cat("  \n##",  div_in, "\n")
+  div_teams = bats_ids %>% 
+                 filter(division == div_in) %>%
+                 distinct(team) %>%
+                 pull(team)
+  
+  walk(div_teams, function(team_in){
+  cat("  \n###",  str_to_title(team_in), "\n")  
+    
+    bats_ids_team = bats_ids %>% 
+      filter(team == team_in)  
+  
+    p_tables_team = p_tables %>% 
+      filter(mlbam_id_batter %in% bats_ids_team$mlbam_id)
+  
+    p_tables_names_and_ids <- p_tables_team %>% 
+      distinct(mlbam_id_batter, player_name) %>% 
+      group_by(mlbam_id_batter) %>% 
+      slice(1) %>% 
+      ungroup %>% 
+      mutate(player_name_lbl = str_replace(player_name, "\\s", "\n")) 
+    
+    p_tables_team <- p_tables_team %>% 
+      select(-player_name) %>% 
+      left_join(p_tables_names_and_ids) %>% 
+      drop_na %>% 
+      group_by(mlbam_id_batter, season) %>% 
+      mutate(mean_launch_speed = mean(launch_speed, na.rm = T),
+             median_launch_speed = median(launch_speed, na.rm = T),
+             max_launch_speed = max(launch_speed, na.rm = T)
+      ) %>% 
+      ungroup 
+    
+    p_tables_ev_lbl = p_tables_team %>%
+      filter(season == 2020) %>% 
+      distinct(mlbam_id_batter, player_name_lbl, mean_launch_speed, 
+               median_launch_speed, max_launch_speed)  %>%
+      mutate(launch_speed = 100)
+    
+    p_order = p_tables_ev_lbl %>%  
+      arrange(desc(max_launch_speed)) %>% 
+      mutate(p_order_2020_max = 1:n()) %>%  
+      arrange(desc(mean_launch_speed)) %>% 
+      mutate(p_order_2020_mean = 1:n()) %>% 
+      arrange(desc(median_launch_speed)) %>% 
+      mutate(p_order_2020_median = 1:n()) %>% 
+      select(-ends_with("_speed"))
+    
+    num_players = max(p_order$p_order_2020_max)
+    
+    p_df <- p_tables_team %>% 
+      left_join(p_order) %>% 
+      mutate(player_name_lbl = fct_reorder(player_name_lbl, p_order_2020_max))
+    
+    p_2020 = p_df %>% 
+      filter(season == 2020) %>% 
+      ggplot(aes(x = reorder(player_name_lbl, -max_launch_speed),
+                 y = launch_speed)) + 
+      geom_boxplot(color = '#13274F', fill = "#f8f2e4", alpha = .5) +  
+      geom_text(data = p_tables_ev_lbl %>% 
+                  filter(max_launch_speed == max(max_launch_speed)),
+                aes(x = reorder(player_name_lbl, max_launch_speed),
+                    y = median_launch_speed + 3,
+                    label = paste0("Median\n", round(median_launch_speed, 1)))) + 
+      geom_label(data = p_tables_ev_lbl %>% 
+                   filter(max_launch_speed == max(max_launch_speed)),
+                 aes(x = reorder(player_name_lbl, max_launch_speed),
+                     y = max_launch_speed + 1.5,
+                     label = paste0("Max ", round(max_launch_speed, 1))),
+                 fill = "#f8f2e4", alpha = .5) + 
+      plot_theme() +
+      scale_y_continuous(limits = c(25, 125),
+                         breaks = c(seq(25, 75, by = 25), seq(85, 115, by = 5)),
+                         labels = c(seq(25, 75, by = 25), seq(85, 115, by = 5))) + 
+      ggtitle("Exit Velocity Box Plots 2020") + 
+      theme(panel.grid.minor = element_blank(),
+            panel.grid.major.x = element_blank(),
+            panel.grid.major.y = element_line(color = "#A4A4A4", size = .4, linetype = 'dotted'),
+            axis.title = element_blank())
+    
+    
+  
+    #subchunkify(plot(p_2020), fig_height=8.5, fig_width=10)
+    plot(p_2020)
+    cat("\n")
+    
+    p1 <- p_df %>% 
+      filter(p_order_2020_max <= round((num_players / 2) , 0)) %>% 
+      make_season_ev_boxplot_by_player
+    
+    p2 <- p_df %>% 
+      filter(p_order_2020_max > round((num_players / 2) , 0)) %>% 
+      make_season_ev_boxplot_by_player
+    
+    p_2015_2020 <- patchwork::wrap_plots(p1, 
+                                         p2 + theme(plot.title = element_blank()),
+                                         ncol = 1, heights = c(.5, .5))
+    
+    #subchunkify(plot(p_2015_2020), fig_height=12.5, fig_width=10)
+    plot(p_2015_2020)
+    cat("\n")
+    })
+  
+   
+  cat("\n")
+
+})
+
+
+```
+
+***********
+  
