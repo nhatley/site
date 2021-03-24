@@ -51,7 +51,7 @@ divs = bats_ids %>% arrange(div_order) %>% distinct(division) %>% pull(division)
 source(paste0(mlb_db_dir, "code/functions/plot_theme.R"))
 ```
 
-```{r, fig.align='center', out.width = "65%", out.height= "50%"}
+```{r, fig.align='center', out.width = "85%", out.height= "15%"}
 example_bx <- p_tables %>% 
   filter(mlbam_id_batter == 645277) %>% 
   group_by(mlbam_id_batter, season) %>% 
@@ -192,7 +192,7 @@ p <- p_df %>%
 
 plot(p)  
 cat("\n")
-
+cat("<br>")
 })
 
 
