@@ -185,10 +185,11 @@ p <- p_df %>%
                      labels = c(seq(50, 75, by = 25), seq(85, 115, by = 5))) + 
   coord_flip() + 
   ggtitle("Exit Velocity (MPH) on all batted balls in 2020") + 
+  labs(y = "\n Exit Velocity (MPH) on all batted balls in 2020 \n") + 
   theme(panel.grid.minor = element_blank(),
         panel.grid.major.x = element_line(color = "#A4A4A4", size = .4, linetype = 'dotted'),
         panel.grid.major.y = element_blank(),
-        axis.title = element_blank())
+        axis.title.y = element_blank())
 
 plot(p)  
 cat("\n")
