@@ -52,7 +52,8 @@ source(paste0(mlb_db_dir, "code/functions/plot_theme.R"))
 ```
 
 
-```{r, out.width = "45%", out.height= "35%", fig.align='center'}
+```{r, fig.align='center'}
+# out.width = "45%", out.height= "35%",
 walk(divs, function(div_in){
   
   cat("  \n##",  div_in, "\n")

@@ -13,13 +13,11 @@
     
     <item>
       <title>Exit Velo Boxplots</title>
-      <link>http://www.nickhatley.com/baseball/wrc_plus/</link>
+      <link>http://www.nickhatley.com/baseball/exit_velo_boxplots/</link>
       <pubDate>Tue, 23 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://www.nickhatley.com/baseball/wrc_plus/</guid>
-      <description>Weighted Runs Created Plus or wrc+ is a nice stat for analyzing relative hitter performance for a certain year. It’s relative because it is scaled to every hitter in the league for that season.
-So, an average hitter has a wrc+ of 100. This makes it interesting to look at a team’s wrc+ distribution to see how many good hitters they have.
-You can see the league wrc+ distribution is fairly evenly distributed.</description>
+      <guid>http://www.nickhatley.com/baseball/exit_velo_boxplots/</guid>
+      <description>  ## ## ## NL East ## ## ### Braves ## ## ## ### Marlins ## ## ## ### Mets ## ## ## ### Nationals ## ## ## ### Phillies ## ## ## ## ## NL Central ## ## ### Brewers ## ## ## ### Cardinals ## ## ## ### Cubs ## ## ## ### Pirates ## ## ## ### Reds ## ## ## ## ## NL West ## ## ### Diamondbacks ## ## ## ### Dodgers ## ## ## ### Giants ## ## ## ### Padres ## ## ## ### Rockies ## ## ## ## ## AL East ## ## ### Bluejays ## ## ## ### Orioles ## ## ## ### Rays ## ## ## ### Redsox ## ## ## ### Yankees ## ## ## ## ## AL Central ## ## ### Indians ## ## ## ### Royals ## ## ## ### Tigers ## ## ## ### Twins ## ## ## ### Whitesox ## ## ## ## ## AL West ## ## ### Angels ## ## ## ### Astros ## ## ## ### Athletics ## ## ## ### Mariners ## ## ## ### Rangers </description>
     </item>
     
     <item>
