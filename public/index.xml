@@ -77,7 +77,7 @@ You can see the league wrc+ distribution is fairly evenly distributed.</descript
       <description>Data from this post retreived via the fabulous baseballr package from Bill Petti.
 It has a number of data acquisition and other functions. Here, I used the baseballr::scrape_savant_leaderboards() function to fetch data from the MLB’s baseball savant website for exit velocity as measured by Statcast.
 The resulting dataset looks like:
-barrels_15_19 %&amp;gt;% glimpse() ## Observations: 2,375 ## Variables: 19 ## $ year &amp;lt;int&amp;gt; 2015, 2015, 2015, 2015, 2015, 2015, 2015, … ## $ last_name &amp;lt;chr&amp;gt; &amp;quot;Stanton&amp;quot;, &amp;quot;Cruz&amp;quot;, &amp;quot;Trout&amp;quot;, &amp;quot;Gonzalez&amp;quot;, &amp;quot;R… ## $ first_name &amp;lt;chr&amp;gt; &amp;quot;Giancarlo&amp;quot;, &amp;quot;Nelson&amp;quot;, &amp;quot;Mike&amp;quot;, &amp;quot;Carlos&amp;quot;, &amp;quot;… ## $ player_id &amp;lt;dbl&amp;gt; 519317, 443558, 545361, 471865, 434670, 12… ## $ attempts &amp;lt;dbl&amp;gt; 187, 427, 422, 428, 334, 385, 377, 445, 24… ## $ avg_hit_angle &amp;lt;dbl&amp;gt; 15.</description>
+barrels_15_19 %&amp;gt;% glimpse() ## Rows: 704 ## Columns: 20 ## $ year &amp;lt;int&amp;gt; 2015, 2015, 2015, 2015, 2015, 2015, 2015, 2015,… ## $ last_name &amp;lt;chr&amp;gt; &amp;quot;Martinez&amp;quot;, &amp;quot;Trout&amp;quot;, &amp;quot;Davis&amp;quot;, &amp;quot;Ortiz&amp;quot;, &amp;quot;Cruz&amp;quot;, … ## $ first_name &amp;lt;chr&amp;gt; &amp;quot;J.</description>
     </item>
     
     <item>
