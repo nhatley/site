@@ -25,8 +25,20 @@ p_tables1 <- read_rds(paste0(mlb_db_dir, 'data/statcast/2020/batted_balls/batted
 p_tables2 <- read_rds(paste0(mlb_db_dir, 'data/statcast/2020/batted_balls/batted_balls_8august_2020.rds'))
 p_tables3 <- read_rds(paste0(mlb_db_dir, 'data/statcast/2020/batted_balls/batted_balls_9september_2020.rds'))
 p_tables <- bind_rows(p_tables1, p_tables2, p_tables3)
-bats_ids <- read_rds(paste0(mlb_db_dir, 'output/plots/exit_velocity/bats_ids.rds'))
+bats_ids <- read_rds(paste0(mlb_db_dir, '/data/crosswalks/depth_chart_plus_ids_from_crosswalk.rds'))
 
+team_cw  <- read_rds(paste0(mlb_db_dir, 'data/crosswalks/team_crosswalk_current.rds')) %>% 
+  rename(team = fg_url_name) %>% 
+  distinct(team, division) %>% 
+  mutate(div_order = case_when(
+    division == "NL East" ~ 1,
+    division == "NL Central" ~ 2, 
+    division == "NL West" ~ 3,
+    division == "AL East" ~ 4,
+    division == "AL Central" ~ 5,
+    division == "AL West" ~ 6))
+
+bats_ids <- bats_ids %>% left_join(team_cw)
 
 divs = bats_ids %>% arrange(div_order) %>% distinct(division) %>% pull(division)
 source(paste0(mlb_db_dir, "code/functions/plot_theme.R"))
@@ -94,7 +106,7 @@ example_bx %>%
   
 ***********
   
-```{r, results = 'asis', fig.align='center', fig.height=15, fig.width=10}
+```{r, results = 'asis', fig.align='center', fig.height=20, fig.width=10}
 divs = bats_ids %>% arrange(div_order) %>% distinct(division) %>% pull(division)
 
 walk(divs, function(div_in){
