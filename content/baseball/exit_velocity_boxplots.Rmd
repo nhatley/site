@@ -106,7 +106,7 @@ example_bx %>%
   
 ***********
   
-```{r, results = 'asis', fig.align='center', fig.height=20, fig.width=10}
+```{r, results = 'asis', fig.align='center', fig.height=18, fig.width=10}
 divs = bats_ids %>% arrange(div_order) %>% distinct(division) %>% pull(division)
 
 walk(divs, function(div_in){
