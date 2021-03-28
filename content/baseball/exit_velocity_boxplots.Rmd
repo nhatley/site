@@ -20,7 +20,11 @@ options(knitr.table.format = "html")
 library(tidyverse)
 
 mlb_db_dir = "~/Dropbox/mlb/"
-p_tables <- read_rds(paste0(mlb_db_dir, 'output/plots/exit_velocity/p_tables_2020.rds'))
+
+p_tables1 <- read_rds(paste0(mlb_db_dir, 'data/statcast/2020/batted_balls/batted_balls_7july_2020.rds'))
+p_tables2 <- read_rds(paste0(mlb_db_dir, 'data/statcast/2020/batted_balls/batted_balls_8august_2020.rds'))
+p_tables3 <- read_rds(paste0(mlb_db_dir, 'data/statcast/2020/batted_balls/batted_balls_9september_2020.rds'))
+p_tables <- bind_rows(p_tables1, p_tables2, p_tables3)
 bats_ids <- read_rds(paste0(mlb_db_dir, 'output/plots/exit_velocity/bats_ids.rds'))
 
 
