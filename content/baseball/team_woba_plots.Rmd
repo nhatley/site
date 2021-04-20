@@ -1,0 +1,123 @@
+---
+title: "Team wOBA vs xWOBA"
+author: "Nick Hatley"
+date: "2021-04-19"
+output:
+  blogdown::html_page
+categories: ["R"]
+slug: wOBA_vs_xWOBA
+tags: [ "hitting", "statcast", "wOBA"]
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(warning =  FALSE)
+knitr::opts_chunk$set(message = FALSE)
+options(knitr.table.format = "html")
+```
+
+
+```{r get librarys, function and data}
+library(tidyverse)
+
+mlb_db_dir = "~/Dropbox/mlb/"
+
+bb_expected_stats <-  read_rds(paste0(mlb_db_dir, 'output/for_website/bb_expected_stats.rds'))
+team_game_dates <-  read_rds(paste0(mlb_db_dir, 'output/for_website/team_game_dates.rds'))
+
+
+team_cw  <- read_rds(paste0(mlb_db_dir, 'data/crosswalks/team_crosswalk_current.rds')) %>% 
+  rename(team = abbreviation) %>% 
+  distinct(team, division) %>% 
+  mutate(div_order = case_when(
+    division == "NL East" ~ 1,
+    division == "NL Central" ~ 2, 
+    division == "NL West" ~ 3,
+    division == "AL East" ~ 4,
+    division == "AL Central" ~ 5,
+    division == "AL West" ~ 6))
+
+
+teams <- team_cw %>% pull(team)
+
+source(paste0(mlb_db_dir, "code/functions/plot_theme.R"))
+```
+
+```{r, results = 'asis', fig.align='center', fig.height=10, fig.width=10}
+walk(teams, function(t){
+  
+cat(t, "\n")
+
+  bb_expected_stats_braves_all <- bb_expected_stats %>% filter(team == t) %>% distinct
+  
+  bb_expected_stats_braves <- bb_expected_stats_braves_all %>% 
+    filter(hand_of_pitcher == 'both', pitch_type == 'All') %>% 
+    filter(batted_balls > 6)
+  
+  p <- bb_expected_stats_braves %>% 
+    mutate(name = paste(batter_name_first, batter_name_last, sep = " ")) %>% 
+    bind_rows(
+      bb_expected_stats_braves %>% 
+        mutate(name = paste0(team, " overall")) %>% 
+        group_by(name) %>% 
+        summarise(estimated_woba_using_speedangle_mean = mean(estimated_woba_using_speedangle_mean),
+                  woba_value_mean = mean(woba_value_mean)
+        )
+    ) %>% 
+    bind_rows(tibble(name = 'Example', woba_value_mean = .75, estimated_woba_using_speedangle_mean = .25)) %>% 
+    mutate(woba_luck = estimated_woba_using_speedangle_mean - woba_value_mean,
+           woba_luck_label = ifelse(woba_luck > 0, "Unlucky", "Lucky"),
+           woba_rank = dense_rank(woba_value_mean)
+    ) %>% 
+    mutate(g = case_when(
+      str_detect(name, "overall$") ~ as.character(name),
+      TRUE ~ "")) %>% 
+    ggplot(aes(x = estimated_woba_using_speedangle_mean, 
+               y = reorder(name, woba_value_mean),
+               group = name)) + 
+    geom_segment(aes(xend = woba_value_mean, yend = name,
+                     color = woba_luck_label),
+                 size = 1.5, arrow.fill = 'white',
+                 arrow = arrow(length = unit(0.15,"cm"))) + 
+    geom_point(aes(x = estimated_woba_using_speedangle_mean, 
+                   y = reorder(name, woba_value_mean),
+                   color = woba_luck_label), 
+               show.legend = FALSE, 
+               size = 1.25, shape = 21, stroke = rel(1.5), fill = "white") + 
+    ggrepel::geom_label_repel(data = . %>% filter(name == 'Example'),
+                              aes(label = 'xWOBA', color = woba_luck_label),
+                              show.legend = FALSE, nudge_y = .045, segment.alpha = .001) + 
+    ggrepel::geom_label_repel(data = . %>% filter(name == 'Example'),
+                              aes(label = '(what we would expect on\nbased on how the ball was hit)', color = woba_luck_label),
+                              size = rel(.85),
+                              show.legend = FALSE, nudge_y = -.045, segment.alpha = .001) + 
+    ggrepel::geom_label_repel(data = . %>% filter(name == 'Example'),
+                              aes(x = woba_value_mean, label = 'Actual\nWOBA', color = woba_luck_label),
+                              show.legend = FALSE, nudge_y = .045, segment.alpha = .001) + 
+    ggforce::facet_col(~g, space = 'free', scales = 'free_y') + 
+    scale_x_continuous(limits = c(0, .8),
+                       breaks = seq(.1, .7, by = .1),
+                       labels = seq(.1, .7, by = .1) %>% paste0('00')) +
+    ggtitle(paste(team_game_dates %>% 
+                    filter(team == t) %>% 
+                    pull(p_title))) +
+    labs(subtitle = "Among players with >6 batted balls", 
+         caption =  "xWOBA estimated from exit velocity and launch angle") + 
+    plot_theme() +
+    theme(panel.grid.minor = element_blank(),
+          panel.grid.major.y = element_blank(),
+          legend.direction = 'vertical',
+          panel.grid.major.x = element_line(linetype = "dotted", color = "#A4A4A4", size = .4),
+          axis.title = element_blank())
+  
+
+plot(p)  
+cat("\n")
+  
+  
+})
+
+
+```
+  
+***********
+  
