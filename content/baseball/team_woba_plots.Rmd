@@ -1,5 +1,5 @@
 ---
-title: "Team wOBA vs xWOBA"
+title: "wOBACON vs xWOBACON (Based on exit velocity and launch angle of batted balls)"
 author: "Nick Hatley"
 date: "2021-04-19"
 output:
@@ -18,6 +18,8 @@ options(knitr.table.format = "html")
 
 ```{r get librarys, function and data}
 library(tidyverse)
+library(kableExtra)
+library(knitr)
 
 mlb_db_dir = "~/Dropbox/mlb/"
 
@@ -36,12 +38,41 @@ team_cw  <- read_rds(paste0(mlb_db_dir, 'data/crosswalks/team_crosswalk_current.
     division == "AL Central" ~ 5,
     division == "AL West" ~ 6))
 
-
 teams <- team_cw %>% pull(team)
 
 source(paste0(mlb_db_dir, "code/functions/plot_theme.R"))
+
+albies_statcast_metrics <- paste0(mlb_db_dir, 'output/for_website/albies_statcast_metrics.csv') %>% 
+  read_csv() %>% 
+  select(Season, 
+         one_of("Exit Velocity", "Launch Angle", "Sweet Spot Rate"),
+         `Hard Hit Rate` = "HardHitRate",
+         xBA = XBA, xSLG = XSLG, xWOBA = XWOBA)
 ```
 
+One of the nice stats we can get from [baseball savant](https://baseballsavant.mlb.com/) is expected stats based on how hard and the launch angle of a player's balls in play. Using these expected stats often helps show whether a player is struggling or just going through a rough stretch of variance. Here is a [nice explainer](https://technology.mlblogs.com/an-introduction-to-expected-weighted-on-base-average-xwoba-29d6070ba52b) of wOBA and xWOBA from MLB's technology blog.   
+
+As an example, consider Ozzie Albie's  pedestrian slashline through 15 games and 54 at-bats so far in 2021 - `.148/.262/.333/.595`. His expected stats tell a bit of a different story though. His expected batting average (xBA) is .302 - more than double his actual batting average and a career high.	 
+  
+```{r}
+albies_statcast_metrics %>% 
+  mutate(across(-one_of('Season'), ~cell_spec(.x, "html",
+                                              background  = case_when(.x == max(.x) ~ "yellow",
+                                                                      TRUE ~ "white")))) %>% 
+  kable(escape = FALSE) %>% 
+  kable_styling(bootstrap_options = c("hover", "condensed")) %>% 
+  add_header_above(c(" " = 1, "Batted Ball #'s" = 4, "Expected Stats" = 3))  %>% 
+  add_footnote('Yellow = Career High', notation = 'none')
+```
+
+***********
+  
+
+> Below are graphs for each team's hitters wOBACON (since we are only looking at batted balls here these are technically the 'CONTACT' version of these stats). The dots represent a player's actual wOBACON. The arrows represent what we can expect that value to be on average based on the ball's exit velocity and launch angle. Blue arrows mean that player has been unlucky - red means lucky. 
+
+  
+  
+  
 ```{r, results = 'asis', fig.align='center', fig.height=10, fig.width=10}
 walk(teams, function(t){
   
@@ -84,15 +115,12 @@ cat(t, "\n")
                show.legend = FALSE, 
                size = 1.25, shape = 21, stroke = rel(1.5), fill = "white") + 
     ggrepel::geom_label_repel(data = . %>% filter(name == 'Example'),
-                              aes(label = 'xWOBA', color = woba_luck_label),
+                              aes(label = 'xWOBACON', color = woba_luck_label),
                               show.legend = FALSE, nudge_y = .045, segment.alpha = .001) + 
     ggrepel::geom_label_repel(data = . %>% filter(name == 'Example'),
-                              aes(label = '(what we would expect on\nbased on how the ball was hit)', color = woba_luck_label),
-                              size = rel(.85),
-                              show.legend = FALSE, nudge_y = -.045, segment.alpha = .001) + 
-    ggrepel::geom_label_repel(data = . %>% filter(name == 'Example'),
-                              aes(x = woba_value_mean, label = 'Actual\nWOBA', color = woba_luck_label),
-                              show.legend = FALSE, nudge_y = .045, segment.alpha = .001) + 
+                              aes(x = woba_value_mean, label = 'Actual\nwOBACON', color = woba_luck_label),
+                              show.legend = FALSE, nudge_y = -.1, nudge_x = .05,
+                              segment.alpha = .5) + 
     ggforce::facet_col(~g, space = 'free', scales = 'free_y') + 
     scale_x_continuous(limits = c(0, .8),
                        breaks = seq(.1, .7, by = .1),
@@ -101,15 +129,15 @@ cat(t, "\n")
                     filter(team == t) %>% 
                     pull(p_title))) +
     labs(subtitle = "Among players with >6 batted balls", 
-         caption =  "xWOBA estimated from exit velocity and launch angle") + 
+         caption =  "xWOBACON estimated from exit velocity and launch angle") + 
     plot_theme() +
     theme(panel.grid.minor = element_blank(),
           panel.grid.major.y = element_blank(),
           legend.direction = 'vertical',
           panel.grid.major.x = element_line(linetype = "dotted", color = "#A4A4A4", size = .4),
           axis.title = element_blank())
-  
 
+  
 plot(p)  
 cat("\n")
   

@@ -1,5 +1,5 @@
 ---
-title: "Team wOBA vs xWOBA"
+title: "wOBACON vs xWOBACON (Based on exit velocity and launch angle of batted balls)"
 author: "Nick Hatley"
 date: "2021-04-19"
 output:
@@ -10,66 +10,257 @@ tags: [ "hitting", "statcast", "wOBA"]
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+<link href="/rmarkdown-libs/lightable/lightable.css" rel="stylesheet" />
 
 
+<p>One of the nice stats we can get from <a href="https://baseballsavant.mlb.com/">baseball savant</a> is expected stats based on how hard and the launch angle of a player’s balls in play. Using these expected stats often helps show whether a player is struggling or just going through a rough stretch of variance. Here is a <a href="https://technology.mlblogs.com/an-introduction-to-expected-weighted-on-base-average-xwoba-29d6070ba52b">nice explainer</a> of wOBA and xWOBA from MLB’s technology blog.</p>
+<p>As an example, consider Ozzie Albie’s pedestrian slashline through 15 games and 54 at-bats so far in 2021 - <code>.148/.262/.333/.595</code>. His expected stats tell a bit of a different story though. His expected batting average (xBA) is .302 - more than double his actual batting average and a career high.</p>
+<table class="table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Batted Ball #’s
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Expected Stats
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:right;">
+Season
+</th>
+<th style="text-align:left;">
+Exit Velocity
+</th>
+<th style="text-align:left;">
+Launch Angle
+</th>
+<th style="text-align:left;">
+Sweet Spot Rate
+</th>
+<th style="text-align:left;">
+Hard Hit Rate
+</th>
+<th style="text-align:left;">
+xBA
+</th>
+<th style="text-align:left;">
+xSLG
+</th>
+<th style="text-align:left;">
+xWOBA
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">87.3</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">15.9</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">35.9</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">26.6</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">0.275</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">0.443</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">0.341</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2018
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">86.9</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">16.1</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">34</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">29.4</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">0.249</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">0.4</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">0.303</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">88.9</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">15.6</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">36.8</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">34</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">0.285</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">0.485</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">0.348</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2020
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">86.7</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">17.8</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">35.2</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">28.4</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">0.24</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">0.417</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;">0.299</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2021
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: yellow !important;">90</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: yellow !important;">21.1</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: yellow !important;">37.8</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: yellow !important;">40</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: yellow !important;">0.302</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: yellow !important;">0.497</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: yellow !important;">0.381</span>
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; border:0;" colspan="100%">
+<sup></sup> Yellow = Career High
+</td>
+</tr>
+</tfoot>
+</table>
+<hr />
+<blockquote>
+<p>Below are graphs for each team’s hitters wOBACON (since we are only looking at batted balls here these are technically the ‘CONTACT’ version of these stats). The dots represent a player’s actual wOBACON. The arrows represent what we can expect that value to be on average based on the ball’s exit velocity and launch angle. Blue arrows mean that player has been unlucky - red means lucky.</p>
+</blockquote>
 <p>ATL
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-1.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-1.png" width="960" style="display: block; margin: auto;" />
 MIA
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-2.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-2.png" width="960" style="display: block; margin: auto;" />
 NYM
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-3.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-3.png" width="960" style="display: block; margin: auto;" />
 PHI
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-4.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-4.png" width="960" style="display: block; margin: auto;" />
 WSN
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-5.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-5.png" width="960" style="display: block; margin: auto;" />
 CHC
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-6.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-6.png" width="960" style="display: block; margin: auto;" />
 CIN
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-7.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-7.png" width="960" style="display: block; margin: auto;" />
 MIL
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-8.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-8.png" width="960" style="display: block; margin: auto;" />
 PIT
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-9.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-9.png" width="960" style="display: block; margin: auto;" />
 STL
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-10.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-10.png" width="960" style="display: block; margin: auto;" />
 ARI
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-11.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-11.png" width="960" style="display: block; margin: auto;" />
 COL
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-12.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-12.png" width="960" style="display: block; margin: auto;" />
 LAD
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-13.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-13.png" width="960" style="display: block; margin: auto;" />
 SDP
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-14.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-14.png" width="960" style="display: block; margin: auto;" />
 SFG
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-15.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-15.png" width="960" style="display: block; margin: auto;" />
 BAL
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-16.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-16.png" width="960" style="display: block; margin: auto;" />
 BOS
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-17.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-17.png" width="960" style="display: block; margin: auto;" />
 NYY
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-18.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-18.png" width="960" style="display: block; margin: auto;" />
 TBR
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-19.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-19.png" width="960" style="display: block; margin: auto;" />
 TOR
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-20.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-20.png" width="960" style="display: block; margin: auto;" />
 CHW
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-21.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-21.png" width="960" style="display: block; margin: auto;" />
 CLE
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-22.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-22.png" width="960" style="display: block; margin: auto;" />
 DET
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-23.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-23.png" width="960" style="display: block; margin: auto;" />
 KCR
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-24.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-24.png" width="960" style="display: block; margin: auto;" />
 MIN
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-25.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-25.png" width="960" style="display: block; margin: auto;" />
 HOU
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-26.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-26.png" width="960" style="display: block; margin: auto;" />
 LAA
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-27.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-27.png" width="960" style="display: block; margin: auto;" />
 OAK
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-28.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-28.png" width="960" style="display: block; margin: auto;" />
 SEA
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-29.png" width="960" style="display: block; margin: auto;" />
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-29.png" width="960" style="display: block; margin: auto;" />
 TEX
-<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-1-30.png" width="960" style="display: block; margin: auto;" /></p>
+<img src="/baseball/team_woba_plots_files/figure-html/unnamed-chunk-2-30.png" width="960" style="display: block; margin: auto;" /></p>
 <hr />
