@@ -25,8 +25,6 @@ mlb_db_dir = "~/Dropbox/mlb/"
 
 bb_expected_stats <-  read_rds(paste0(mlb_db_dir, 'output/for_website/bb_expected_stats.rds'))
 team_game_dates <-  read_rds(paste0(mlb_db_dir, 'output/for_website/team_game_dates.rds'))
-
-
 team_cw  <- read_rds(paste0(mlb_db_dir, 'data/crosswalks/team_crosswalk_current.rds')) %>% 
   rename(team = abbreviation) %>% 
   distinct(team, division) %>% 
@@ -36,8 +34,15 @@ team_cw  <- read_rds(paste0(mlb_db_dir, 'data/crosswalks/team_crosswalk_current.
     division == "NL West" ~ 3,
     division == "AL East" ~ 4,
     division == "AL Central" ~ 5,
-    division == "AL West" ~ 6))
-
+    division == "AL West" ~ 6)) %>% 
+  mutate(team = case_when(
+    team == 'WSN' ~ "WSH",
+    team == "SDP" ~ "SD",
+    team == "SFG" ~ "SF",
+    team == "TBR" ~ "TB",
+    team == "CHW" ~ "CWS",
+    team == "KCR" ~ "KC",
+    TRUE ~ as.character(team)))
 teams <- team_cw %>% pull(team)
 
 source(paste0(mlb_db_dir, "code/functions/plot_theme.R"))
@@ -54,6 +59,8 @@ One of the nice stats we can get from [baseball savant](https://baseballsavant.m
 
 As an example, consider Ozzie Albie's  pedestrian slashline through 15 games and 54 at-bats so far in 2021 - `.148/.262/.333/.595`. His expected stats tell a bit of a different story though. His expected batting average (xBA) is .302 - more than double his actual batting average and a career high.	 
   
+***********
+  
 ```{r}
 albies_statcast_metrics %>% 
   mutate(across(-one_of('Season'), ~cell_spec(.x, "html",
@@ -67,24 +74,25 @@ albies_statcast_metrics %>%
 
 ***********
   
+<br>
 
 > Below are graphs for each team's hitters wOBACON (since we are only looking at batted balls here these are technically the 'CONTACT' version of these stats). The dots represent a player's actual wOBACON. The arrows represent what we can expect that value to be on average based on the ball's exit velocity and launch angle. Blue arrows mean that player has been unlucky - red means lucky. 
 
-  
-  
+<br>  
+<br>  
   
 ```{r, results = 'asis', fig.align='center', fig.height=10, fig.width=10}
 walk(teams, function(t){
   
-cat(t, "\n")
-
+  cat(t, "\n")
+  
   bb_expected_stats_braves_all <- bb_expected_stats %>% filter(team == t) %>% distinct
   
   bb_expected_stats_braves <- bb_expected_stats_braves_all %>% 
     filter(hand_of_pitcher == 'both', pitch_type == 'All') %>% 
     filter(batted_balls > 6)
   
-  p <- bb_expected_stats_braves %>% 
+  p_df <-  bb_expected_stats_braves %>% 
     mutate(name = paste(batter_name_first, batter_name_last, sep = " ")) %>% 
     bind_rows(
       bb_expected_stats_braves %>% 
@@ -94,14 +102,20 @@ cat(t, "\n")
                   woba_value_mean = mean(woba_value_mean)
         )
     ) %>% 
-    bind_rows(tibble(name = 'Example', woba_value_mean = .75, estimated_woba_using_speedangle_mean = .25)) %>% 
     mutate(woba_luck = estimated_woba_using_speedangle_mean - woba_value_mean,
            woba_luck_label = ifelse(woba_luck > 0, "Unlucky", "Lucky"),
            woba_rank = dense_rank(woba_value_mean)
     ) %>% 
     mutate(g = case_when(
       str_detect(name, "overall$") ~ as.character(name),
-      TRUE ~ "")) %>% 
+      TRUE ~ "")) 
+  
+  woba_label = p_df %>% drop_na %>% filter(woba_value_mean == max(woba_value_mean))
+  xwoba_label = p_df %>% drop_na %>% 
+    filter(woba_luck_label == "Unlucky") %>% 
+    filter(estimated_woba_using_speedangle_mean == max(estimated_woba_using_speedangle_mean))
+  
+  p <- p_df %>% 
     ggplot(aes(x = estimated_woba_using_speedangle_mean, 
                y = reorder(name, woba_value_mean),
                group = name)) + 
@@ -114,13 +128,12 @@ cat(t, "\n")
                    color = woba_luck_label), 
                show.legend = FALSE, 
                size = 1.25, shape = 21, stroke = rel(1.5), fill = "white") + 
-    ggrepel::geom_label_repel(data = . %>% filter(name == 'Example'),
-                              aes(label = 'xWOBACON', color = woba_luck_label),
-                              show.legend = FALSE, nudge_y = .045, segment.alpha = .001) + 
-    ggrepel::geom_label_repel(data = . %>% filter(name == 'Example'),
-                              aes(x = woba_value_mean, label = 'Actual\nwOBACON', color = woba_luck_label),
-                              show.legend = FALSE, nudge_y = -.1, nudge_x = .05,
-                              segment.alpha = .5) + 
+    ggrepel::geom_label_repel(data = woba_label,
+                              aes(x = woba_value_mean, label = 'Actual', color = woba_luck_label),
+                              show.legend = FALSE, segment.alpha = .75, nudge_x = .05, nudge_y = -.085) + 
+    ggrepel::geom_label_repel(data = xwoba_label,
+                              aes(label = 'Expected', color = woba_luck_label),
+                              show.legend = FALSE, segment.alpha = .75, nudge_x = .05, nudge_y = .125) + 
     ggforce::facet_col(~g, space = 'free', scales = 'free_y') + 
     scale_x_continuous(limits = c(0, .8),
                        breaks = seq(.1, .7, by = .1),
@@ -128,22 +141,20 @@ cat(t, "\n")
     ggtitle(paste(team_game_dates %>% 
                     filter(team == t) %>% 
                     pull(p_title))) +
-    labs(subtitle = "Among players with >6 batted balls", 
-         caption =  "xWOBACON estimated from exit velocity and launch angle") + 
+    labs(subtitle = "Dots = Expected wOBACON   Arrows = Actual wOBACON", 
+         caption =  "xWOBACON estimated from exit velocity and launch angle (among players with >6 batted balls)") + 
     plot_theme() +
     theme(panel.grid.minor = element_blank(),
           panel.grid.major.y = element_blank(),
           legend.direction = 'vertical',
           panel.grid.major.x = element_line(linetype = "dotted", color = "#A4A4A4", size = .4),
           axis.title = element_blank())
-
   
-plot(p)  
-cat("\n")
+  plot(p)  
+  cat("\n")
   
   
 })
-
 
 ```
   
