@@ -131,14 +131,17 @@ walk(teams, function(t){
                size = 1.25, shape = 21, stroke = rel(1.5), fill = "white") + 
     ggrepel::geom_label_repel(data = woba_label,
                               aes(x = woba_value_mean, label = 'Actual', color = woba_luck_label),
-                              show.legend = FALSE, segment.alpha = .75, nudge_x = .05, nudge_y = -.085) + 
+                              show.legend = FALSE, segment.alpha = .75, 
+                              nudge_x = .05, nudge_y = -.085) + 
     ggrepel::geom_label_repel(data = xwoba_label,
                               aes(label = 'Expected', color = woba_luck_label),
-                              show.legend = FALSE, segment.alpha = .75, nudge_x = .05, nudge_y = .125) + 
+                              show.legend = FALSE, segment.alpha = .75, 
+                              nudge_x = .05, nudge_y = .125) + 
     ggforce::facet_col(~g, space = 'free', scales = 'free_y') + 
-    scale_x_continuous(limits = c(0, .8),
-                       breaks = seq(.1, .7, by = .1),
-                       labels = seq(.1, .7, by = .1) %>% paste0('00')) +
+        scale_x_continuous(limits = c(0, 1.01),
+                       breaks = seq(.1, .9, by = .1),
+                       labels = seq(.1, .9, by = .1) %>% paste0('00')) +
+
     ggtitle(paste(team_game_dates %>% 
                     filter(team == t) %>% 
                     pull(p_title))) +
