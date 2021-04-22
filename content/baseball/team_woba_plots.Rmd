@@ -115,16 +115,17 @@ walk(teams, function(t){
     filter(woba_luck_label == "Unlucky") %>% 
     filter(estimated_woba_using_speedangle_mean == max(estimated_woba_using_speedangle_mean))
   
+  
   p <- p_df %>% 
     ggplot(aes(x = estimated_woba_using_speedangle_mean, 
-               y = reorder(name, woba_value_mean),
+               y = reorder(name, estimated_woba_using_speedangle_mean),
                group = name)) + 
     geom_segment(aes(xend = woba_value_mean, yend = name,
                      color = woba_luck_label),
                  size = 1.5, arrow.fill = 'white',
                  arrow = arrow(length = unit(0.15,"cm"))) + 
     geom_point(aes(x = estimated_woba_using_speedangle_mean, 
-                   y = reorder(name, woba_value_mean),
+                   y = reorder(name, estimated_woba_using_speedangle_mean),
                    color = woba_luck_label), 
                show.legend = FALSE, 
                size = 1.25, shape = 21, stroke = rel(1.5), fill = "white") + 
