@@ -81,13 +81,14 @@ albies_statcast_metrics %>%
   
 > Below are graphs for each team's hitters wOBACON (since we are only looking at batted balls here these are technically the 'CONTACT' version of these stats). The dots represent a player's actual wOBACON. The arrows represent what we can expect that value to be on average based on the ball's exit velocity and launch angle. Blue arrows mean that player has been unlucky - red means lucky. 
 
-<br>  
-```{r, results = 'asis', fig.align='center', fig.height=5, fig.width=7.5}
+***********  
+
+```{r, results = 'asis', fig.align='center', fig.height=5, fig.width=8.5}
 ex_p_df2 %>% 
   ggplot(aes(x = value, 
              y = stat,
              group = name)) + 
-  geom_point(aes(color = woba_luck_label),#, shape = stat), 
+  geom_point(aes(color = woba_luck_label),
              show.legend = FALSE, 
              size = 2.5, shape = 21, stroke = rel(1.5), fill = "white") + 
   geom_segment(data = ex_p_df2 %>% spread(stat, value) %>% mutate(stat = 'Expected - Actual'), 
@@ -97,9 +98,13 @@ ex_p_df2 %>%
                    color = woba_luck_label),
                size = 2.5, arrow.fill = 'white',
                arrow = arrow(length = unit(0.25,"cm"))) +
+  geom_point(data = ex_p_df2 %>% spread(stat, value) %>% mutate(stat = 'Expected - Actual'),
+             aes(x = xWOBACON, color = woba_luck_label),
+             show.legend = FALSE, 
+             size = 2.5, shape = 21, stroke = rel(1.5), fill = "white") + 
   ggforce::facet_col(~name, space = 'free', scales = 'free_y') + 
   ggrepel::geom_label_repel(data = ex_p_df2 %>% spread(stat, value) %>% mutate(stat = 'Expected - Actual'), 
-                            aes(x = xWOBACON, label = woba_luck_label, color = woba_luck_label),
+                            aes(x = mid_woba, label = woba_luck_label, color = woba_luck_label),
                             size = 5, nudge_y = .35, show.legend = FALSE) + 
   scale_x_continuous(limits = c(.329, .71),
                      breaks = seq(.35, .7, by = .1),
@@ -168,8 +173,8 @@ p_df_by_team %>%
         panel.grid.major.x = element_line(linetype = "dotted", color = "#A4A4A4", size = .4),
         axis.title = element_blank(),
         legend.position = c(.8, .7), 
-        legend.box.margin=margin(0,0, 0,0),
-        legend.box.background = element_rect(color = 'grey25'))
+        legend.box.margin=margin(5,5, 5,5),
+        legend.box.background = element_rect(color = 'black'))
 ```    
   
 ***********
@@ -221,14 +226,6 @@ walk(teams, function(t){
       nudge_woba_x = nudge_xwoba_x * -1, # can just do the opposite of xwoba
       nudge_woba_y = nudge_xwoba_y)
   
-  woba_luck_label_ys <- p_df %>% drop_na %>% 
-    anti_join(woba_labels) %>% 
-    filter(abs(woba_luck) > .1) %>% 
-    group_by(woba_luck_label) %>% 
-    filter(y_ax_rank == min(y_ax_rank)) %>% 
-    ungroup  %>% 
-    mutate(mid_woba = (woba_value_mean + estimated_woba_using_speedangle_mean) / 2) 
-    
   p <- p_df %>% 
     ggplot(aes(x = estimated_woba_using_speedangle_mean, 
                y = reorder(name, estimated_woba_using_speedangle_mean),
@@ -242,15 +239,12 @@ walk(teams, function(t){
                    color = woba_luck_label), 
                show.legend = FALSE, 
                size = 1.25, shape = 21, stroke = rel(1.5), fill = "white") + 
-    ggrepel::geom_text_repel(data = woba_labels,
+    ggrepel::geom_label_repel(data = woba_labels,
                               aes(x = woba_value_mean, label = 'Actual'), color = 'grey67',
                               show.legend = FALSE, segment.alpha = .75, nudge_x = woba_labels$nudge_woba_x, nudge_y = woba_labels$nudge_woba_y) + 
     ggrepel::geom_label_repel(data = woba_labels,
                               aes(label = 'Expected'), color = 'grey67',
                               show.legend = FALSE, segment.alpha = .75, nudge_x = woba_labels$nudge_xwoba_x, nudge_y = woba_labels$nudge_xwoba_y) + 
-    ggrepel::geom_label_repel(data = woba_luck_label_ys,
-                              aes(x = mid_woba, label = woba_luck_label, color = woba_luck_label),
-                              show.legend = FALSE, segment.alpha = .75, nudge_y = -.085) + 
     ggforce::facet_col(~g, space = 'free', scales = 'free_y') + 
     scale_x_continuous(limits = c(0, 1.01),
                        breaks = seq(.1, .9, by = .1),
@@ -264,6 +258,9 @@ walk(teams, function(t){
     theme(panel.grid.minor = element_blank(),
           panel.grid.major.y = element_blank(),
           legend.direction = 'vertical',
+          legend.position = c(.635, .525),
+          legend.box.margin=margin(5,5, 5,5),
+          legend.box.background = element_rect(color = 'black'),
           panel.grid.major.x = element_line(linetype = "dotted", color = "#A4A4A4", size = .4),
           axis.title = element_blank())
   
