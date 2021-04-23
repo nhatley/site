@@ -130,7 +130,7 @@ p_df_by_team %>%
         panel.grid.major.y = element_blank(),
         legend.direction = 'vertical',
         panel.grid.major.x = element_line(linetype = "dotted", color = "#A4A4A4", size = .4),
-        axis.title = element_blank(),legend.key.size = unit(1.25, units = 'cm'),
+        axis.title = element_blank(),
         legend.position = c(.8, .7), 
         legend.box.margin=margin(0,0, 0,0),
         legend.box.background = element_rect(color = 'grey25'))
