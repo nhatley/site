@@ -89,7 +89,7 @@ bb_expected_stats_by_team <- bb_expected_stats %>%
   filter(hand_of_pitcher == 'both', pitch_type == 'All') %>% 
   filter(batted_balls > 6) %>% 
   distinct %>% 
-  mutate(name = paste0(team, " overall")) %>% 
+  mutate(name = paste0(team, " ")) %>% 
   group_by(name) %>% 
   summarise(estimated_woba_using_speedangle_mean = mean(estimated_woba_using_speedangle_mean),
             woba_value_mean = mean(woba_value_mean)
@@ -124,7 +124,7 @@ p_df_by_team %>%
   ggtitle(paste(team_game_dates %>% slice(1) %>% pull(p_title) %>% 
                   str_remove("^.*?games -") %>% str_trim %>% paste0("All teams - games from ", .))) +
   labs(subtitle = "Dots = Expected wOBACON   Arrows = Actual wOBACON", 
-       caption =  "xWOBACON estimated from exit velocity and launch angle (among players with >6 batted balls)") + 
+       caption =  "xWOBACON estimated from exit velocity and launch angle") + 
   plot_theme() +
   theme(panel.grid.minor = element_blank(),
         panel.grid.major.y = element_blank(),
@@ -135,8 +135,6 @@ p_df_by_team %>%
         legend.box.margin=margin(0,0, 0,0),
         legend.box.background = element_rect(color = 'grey25'))
 ```    
-
-<br>  
   
 ***********
   
