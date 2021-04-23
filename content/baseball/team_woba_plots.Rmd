@@ -81,6 +81,8 @@ albies_statcast_metrics %>%
   
 > Below are graphs for each team's hitters wOBACON (since we are only looking at batted balls here these are technically the 'CONTACT' version of these stats). The dots represent a player's actual wOBACON. The arrows represent what we can expect that value to be on average based on the ball's exit velocity and launch angle. Blue arrows mean that player has been unlucky - red means lucky. 
 
+<br>
+  
 ***********  
 
 ```{r, results = 'asis', fig.align='center', fig.height=5, fig.width=8.5}
@@ -88,7 +90,8 @@ ex_p_df2 %>%
   ggplot(aes(x = value, 
              y = stat,
              group = name)) + 
-  geom_point(aes(color = woba_luck_label),
+  geom_point(data = . %>% filter(stat != 'WOBACON'),
+             aes(color = woba_luck_label),
              show.legend = FALSE, 
              size = 2.5, shape = 21, stroke = rel(1.5), fill = "white") + 
   geom_segment(data = ex_p_df2 %>% spread(stat, value) %>% mutate(stat = 'Expected - Actual'), 
@@ -98,10 +101,20 @@ ex_p_df2 %>%
                    color = woba_luck_label),
                size = 2.5, arrow.fill = 'white',
                arrow = arrow(length = unit(0.25,"cm"))) +
-  geom_point(data = ex_p_df2 %>% spread(stat, value) %>% mutate(stat = 'Expected - Actual'),
-             aes(x = xWOBACON, color = woba_luck_label),
-             show.legend = FALSE, 
-             size = 2.5, shape = 21, stroke = rel(1.5), fill = "white") + 
+  geom_segment(data = . %>% filter(stat == 'WOBACON', woba_luck_label == "Lucky"),
+    aes(x = value - .0045, 
+        xend = value, 
+        yend = stat,
+        color = woba_luck_label),
+        size = 2.5, arrow.fill = 'white',
+        arrow = arrow(length = unit(0.25,"cm"))) +
+  geom_segment(data = . %>% filter(stat == 'WOBACON', woba_luck_label != "Lucky"),
+               aes(x = value + .0045, 
+                   xend = value, 
+                   yend = stat,
+                   color = woba_luck_label),
+               size = 2.5, arrow.fill = 'white',
+               arrow = arrow(length = unit(0.25,"cm"))) +
   ggforce::facet_col(~name, space = 'free', scales = 'free_y') + 
   ggrepel::geom_label_repel(data = ex_p_df2 %>% spread(stat, value) %>% mutate(stat = 'Expected - Actual'), 
                             aes(x = mid_woba, label = woba_luck_label, color = woba_luck_label),
