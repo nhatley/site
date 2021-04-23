@@ -61,8 +61,6 @@ As an example, consider Ozzie Albie's  pedestrian slashline through 15 games and
   
 ***********
   
-<br>
-  
 ```{r}
 albies_statcast_metrics %>% 
   mutate(across(-one_of('Season'), ~cell_spec(.x, "html",
@@ -73,17 +71,76 @@ albies_statcast_metrics %>%
   add_header_above(c(" " = 1, "Batted Ball #'s" = 4, "Expected Stats" = 3))  %>% 
   add_footnote('Yellow = Career High', notation = 'none')
 ```
-<br>
-<br>
-***********
   
 <br>
-
+  
+***********
+   
+<br>
+  
 > Below are graphs for each team's hitters wOBACON (since we are only looking at batted balls here these are technically the 'CONTACT' version of these stats). The dots represent a player's actual wOBACON. The arrows represent what we can expect that value to be on average based on the ball's exit velocity and launch angle. Blue arrows mean that player has been unlucky - red means lucky. 
 
 <br>  
+  
+***********
+  
+```{r, results = 'asis', fig.align='center', fig.height=10, fig.width=10}
+bb_expected_stats_by_team <- bb_expected_stats %>%
+  filter(hand_of_pitcher == 'both', pitch_type == 'All') %>% 
+  filter(batted_balls > 6) %>% 
+  distinct %>% 
+  mutate(name = paste0(team, " overall")) %>% 
+  group_by(name) %>% 
+  summarise(estimated_woba_using_speedangle_mean = mean(estimated_woba_using_speedangle_mean),
+            woba_value_mean = mean(woba_value_mean)
+  ) %>% 
+  mutate(woba_luck = estimated_woba_using_speedangle_mean - woba_value_mean,
+         woba_luck_label = ifelse(woba_luck > 0, "Unlucky", "Lucky"),
+         woba_rank = dense_rank(woba_value_mean)
+  ) %>% 
+  mutate(g = "") 
+
+p_df_by_team <- bb_expected_stats_by_team %>%
+  mutate(y_ax_rank = dense_rank(desc(estimated_woba_using_speedangle_mean)),
+         luck_diff = abs(estimated_woba_using_speedangle_mean - woba_value_mean))
+
+p_df_by_team %>% 
+  ggplot(aes(x = estimated_woba_using_speedangle_mean, 
+             y = reorder(name, estimated_woba_using_speedangle_mean),
+             group = name)) + 
+  geom_segment(aes(xend = woba_value_mean, yend = name,
+                   color = woba_luck_label),
+               size = 1.5, arrow.fill = 'white',
+               arrow = arrow(length = unit(0.15,"cm"))) + 
+  geom_point(aes(x = estimated_woba_using_speedangle_mean, 
+                 y = reorder(name, estimated_woba_using_speedangle_mean),
+                 color = woba_luck_label), 
+             show.legend = FALSE, 
+             size = 1.25, shape = 21, stroke = rel(1.5), fill = "white") + 
+  ggforce::facet_col(~g, space = 'free', scales = 'free_y') + 
+  scale_x_continuous(limits = c(.29, .51),
+                     breaks = seq(.3, .5, by = .05),
+                     labels = seq(.3, .5, by = .05) %>% paste0('00')) +
+  ggtitle(paste(team_game_dates %>% slice(1) %>% pull(p_title) %>% 
+                  str_remove("^.*?games -") %>% str_trim %>% paste0("All teams - games from ", .))) +
+  labs(subtitle = "Dots = Expected wOBACON   Arrows = Actual wOBACON", 
+       caption =  "xWOBACON estimated from exit velocity and launch angle (among players with >6 batted balls)") + 
+  plot_theme() +
+  theme(panel.grid.minor = element_blank(),
+        panel.grid.major.y = element_blank(),
+        legend.direction = 'vertical',
+        panel.grid.major.x = element_line(linetype = "dotted", color = "#A4A4A4", size = .4),
+        axis.title = element_blank(),legend.key.size = unit(1.25, units = 'cm'),
+        legend.position = c(.8, .7), 
+        legend.box.margin=margin(0,0, 0,0),
+        legend.box.background = element_rect(color = 'grey25'))
+```    
+
 <br>  
   
+***********
+  
+### By Team
 ```{r, results = 'asis', fig.align='center', fig.height=10, fig.width=10}
 walk(teams, function(t){
   
@@ -113,12 +170,31 @@ walk(teams, function(t){
       str_detect(name, "overall$") ~ as.character(name),
       TRUE ~ "")) 
   
-  woba_label = p_df %>% drop_na %>% filter(woba_value_mean == max(woba_value_mean))
-  xwoba_label = p_df %>% drop_na %>% 
-    filter(woba_luck_label == "Unlucky") %>% 
-    filter(estimated_woba_using_speedangle_mean == max(estimated_woba_using_speedangle_mean))
+  p_df <- p_df %>%
+    mutate(y_ax_rank = dense_rank(desc(estimated_woba_using_speedangle_mean)))
   
+  ## highest xwoba difference among diffs > 7.5
+  woba_labels <- p_df %>% drop_na %>% filter(abs(woba_luck) > .075) %>% 
+    filter(y_ax_rank == min(y_ax_rank)) %>% 
+    mutate(nudge_xwoba_x = case_when(
+      ## arrows going right
+      woba_luck_label == 'Lucky' ~ -.05,
+      woba_luck_label == 'Unlucky' ~ .05),
+      nudge_xwoba_y = case_when(
+        ## is top row
+        y_ax_rank == 1 ~ .125,
+        TRUE ~ -.125),
+      nudge_woba_x = nudge_xwoba_x * -1, # can just do the opposite of xwoba
+      nudge_woba_y = nudge_xwoba_y)
   
+  woba_luck_label_ys <- p_df %>% drop_na %>% 
+    anti_join(woba_labels) %>% 
+    filter(abs(woba_luck) > .1) %>% 
+    group_by(woba_luck_label) %>% 
+    filter(y_ax_rank == min(y_ax_rank)) %>% 
+    ungroup  %>% 
+    mutate(mid_woba = (woba_value_mean + estimated_woba_using_speedangle_mean) / 2) 
+    
   p <- p_df %>% 
     ggplot(aes(x = estimated_woba_using_speedangle_mean, 
                y = reorder(name, estimated_woba_using_speedangle_mean),
@@ -132,19 +208,19 @@ walk(teams, function(t){
                    color = woba_luck_label), 
                show.legend = FALSE, 
                size = 1.25, shape = 21, stroke = rel(1.5), fill = "white") + 
-    ggrepel::geom_label_repel(data = woba_label,
-                              aes(x = woba_value_mean, label = 'Actual', color = woba_luck_label),
-                              show.legend = FALSE, segment.alpha = .75, 
-                              nudge_x = .05, nudge_y = -.085) + 
-    ggrepel::geom_label_repel(data = xwoba_label,
-                              aes(label = 'Expected', color = woba_luck_label),
-                              show.legend = FALSE, segment.alpha = .75, 
-                              nudge_x = .05, nudge_y = .125) + 
-    ggforce::facet_col(~g, space = 'free', scales = 'free') + 
-        scale_x_continuous(limits = c(0, 1.01),
+    ggrepel::geom_text_repel(data = woba_labels,
+                              aes(x = woba_value_mean, label = 'Actual'), color = 'grey67',
+                              show.legend = FALSE, segment.alpha = .75, nudge_x = woba_labels$nudge_woba_x, nudge_y = woba_labels$nudge_woba_y) + 
+    ggrepel::geom_label_repel(data = woba_labels,
+                              aes(label = 'Expected'), color = 'grey67',
+                              show.legend = FALSE, segment.alpha = .75, nudge_x = woba_labels$nudge_xwoba_x, nudge_y = woba_labels$nudge_xwoba_y) + 
+    ggrepel::geom_label_repel(data = woba_luck_label_ys,
+                              aes(x = mid_woba, label = woba_luck_label, color = woba_luck_label),
+                              show.legend = FALSE, segment.alpha = .75, nudge_y = -.085) + 
+    ggforce::facet_col(~g, space = 'free', scales = 'free_y') + 
+    scale_x_continuous(limits = c(0, 1.01),
                        breaks = seq(.1, .9, by = .1),
                        labels = seq(.1, .9, by = .1) %>% paste0('00')) +
-
     ggtitle(paste(team_game_dates %>% 
                     filter(team == t) %>% 
                     pull(p_title))) +
