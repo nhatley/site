@@ -24,6 +24,7 @@ library(knitr)
 mlb_db_dir = "~/Dropbox/mlb/"
 
 bb_expected_stats <-  read_rds(paste0(mlb_db_dir, 'output/for_website/bb_expected_stats.rds'))
+ex_p_df2 <-  read_rds(paste0(mlb_db_dir, 'output/for_website/bb_expected_stats_example.rds'))
 team_game_dates <-  read_rds(paste0(mlb_db_dir, 'output/for_website/team_game_dates.rds'))
 team_cw  <- read_rds(paste0(mlb_db_dir, 'data/crosswalks/team_crosswalk_current.rds')) %>% 
   rename(team = abbreviation) %>% 
@@ -81,9 +82,44 @@ albies_statcast_metrics %>%
 > Below are graphs for each team's hitters wOBACON (since we are only looking at batted balls here these are technically the 'CONTACT' version of these stats). The dots represent a player's actual wOBACON. The arrows represent what we can expect that value to be on average based on the ball's exit velocity and launch angle. Blue arrows mean that player has been unlucky - red means lucky. 
 
 <br>  
+```{r, results = 'asis', fig.align='center', fig.height=5, fig.width=7.5}
+ex_p_df2 %>% 
+  ggplot(aes(x = value, 
+             y = stat,
+             group = name)) + 
+  geom_point(aes(color = woba_luck_label),#, shape = stat), 
+             show.legend = FALSE, 
+             size = 2.5, shape = 21, stroke = rel(1.5), fill = "white") + 
+  geom_segment(data = ex_p_df2 %>% spread(stat, value) %>% mutate(stat = 'Expected - Actual'), 
+               aes(x = xWOBACON, 
+                   xend = WOBACON, 
+                   yend = stat,
+                   color = woba_luck_label),
+               size = 2.5, arrow.fill = 'white',
+               arrow = arrow(length = unit(0.25,"cm"))) +
+  ggforce::facet_col(~name, space = 'free', scales = 'free_y') + 
+  ggrepel::geom_label_repel(data = ex_p_df2 %>% spread(stat, value) %>% mutate(stat = 'Expected - Actual'), 
+                            aes(x = xWOBACON, label = woba_luck_label, color = woba_luck_label),
+                            size = 5, nudge_y = .35, show.legend = FALSE) + 
+  scale_x_continuous(limits = c(.329, .71),
+                     breaks = seq(.35, .7, by = .1),
+                     labels = seq(.35, .7, by = .1) %>% paste0('0')) +
+  ggtitle('How to read these graphs...') +
+  labs(subtitle = "Dots = Expected wOBACON   Arrows = Actual wOBACON", 
+       caption =  "xWOBACON estimated from exit velocity and launch angle (among players with >6 batted balls)\nNumers pulled on 4/23") + 
+  plot_theme() +
+  theme(panel.grid.minor = element_blank(),
+        panel.grid.major.y = element_blank(),
+        legend.direction = 'horizontal',
+        panel.grid.major.x = element_line(linetype = "dotted", color = "#A4A4A4", size = .4),
+        axis.title = element_blank())
+```
   
 ***********
   
+<br>
+  
+### By team
 ```{r, results = 'asis', fig.align='center', fig.height=10, fig.width=10}
 bb_expected_stats_by_team <- bb_expected_stats %>%
   filter(hand_of_pitcher == 'both', pitch_type == 'All') %>% 
@@ -138,7 +174,7 @@ p_df_by_team %>%
   
 ***********
   
-### By Team
+### Each team
 ```{r, results = 'asis', fig.align='center', fig.height=10, fig.width=10}
 walk(teams, function(t){
   
