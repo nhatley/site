@@ -61,6 +61,8 @@ As an example, consider Ozzie Albie's  pedestrian slashline through 15 games and
   
 ***********
   
+<br>
+  
 ```{r}
 albies_statcast_metrics %>% 
   mutate(across(-one_of('Season'), ~cell_spec(.x, "html",
@@ -71,7 +73,8 @@ albies_statcast_metrics %>%
   add_header_above(c(" " = 1, "Batted Ball #'s" = 4, "Expected Stats" = 3))  %>% 
   add_footnote('Yellow = Career High', notation = 'none')
 ```
-
+<br>
+<br>
 ***********
   
 <br>
@@ -137,7 +140,7 @@ walk(teams, function(t){
                               aes(label = 'Expected', color = woba_luck_label),
                               show.legend = FALSE, segment.alpha = .75, 
                               nudge_x = .05, nudge_y = .125) + 
-    ggforce::facet_col(~g, space = 'free', scales = 'free_y') + 
+    ggforce::facet_col(~g, space = 'free', scales = 'free') + 
         scale_x_continuous(limits = c(0, 1.01),
                        breaks = seq(.1, .9, by = .1),
                        labels = seq(.1, .9, by = .1) %>% paste0('00')) +
