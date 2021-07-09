@@ -1,0 +1,182 @@
+---
+title: "Team Position Level WAR"
+author: "Nick Hatley"
+date: "2021-07-09"
+output:
+  blogdown::html_page
+categories: ["R"]
+slug: position_level_war_by_team
+tags: ["baseball", "WAR"]
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(warning =  FALSE)
+knitr::opts_chunk$set(message = FALSE)
+options(knitr.table.format = "html")
+```
+
+
+```{r get librarys, function and data}
+library(tidyverse)
+library(kableExtra)
+library(knitr)
+
+mlb_db_dir = "~/Dropbox/mlb/"
+source(paste0(mlb_db_dir, "code/functions/plot_theme.R"))
+
+player_value_summary_long <- paste0(mlb_db_dir,
+                                   "output/for_website/position_group_value_summaries_long.rds") %>% 
+  read_rds
+
+games_thru <- player_value_summary_long$games_thru %>% max %>% as.character 
+                                   
+team_cw <- paste0(mlb_db_dir,
+                  "data/team_crosswalk_current.rds") %>% 
+  read_rds
+
+tm_colors <- paste0(mlb_db_dir,
+                   "reports/logos/mlb_colors.rds") %>% 
+  read_rds
+
+divs <- tm_colors$division %>% unique
+  
+
+```
+
+```{r, results = 'asis', fig.align='center', fig.height=10, fig.width=8.5}
+
+walk(divs, function(division_in){
+  
+  cat(division_in, "\n")
+
+p_colors <- tm_colors %>% 
+  filter(division == division_in) %>% 
+  # left_join(top_three %>% distinct(team_abbrev, top_three)) %>% 
+  # filter(top_three) %>% 
+  spread(color_type, color_hex_code)
+
+colors_primary = c(
+  p_colors %>% pull(primary) %>% 
+    set_names(p_colors$team)
+) %>%
+  as.list()
+colors_secondary = c(
+  p_colors %>% pull(secondary) %>% 
+    set_names(p_colors$team)
+) %>%
+  as.list()
+
+  
+p_df1 <- player_value_summary_long %>% 
+  filter(position_group7 != "DH") %>% 
+  mutate(position_group7 = fct_drop(position_group7)) %>% 
+  filter(stat_cat == "WAR") %>% 
+  filter(division == division_in) %>% 
+  left_join(team_cw %>% select(team = fg_url_name, abbreviation) %>%  distinct) %>% 
+  filter(among == "Team")
+
+p_df <- p_df1 %>% 
+  split(.$position_group7) %>% 
+  imap(~{
+    #cat(.y)
+    arrange(.x, pos_rank, value) %>% 
+        mutate(
+          lag_v = lag(value),
+          lead_v = lead(value),
+          lag_value = value - lag(value),
+               lead_value = value - lead(value)) %>% 
+        mutate(across(ends_with("_value"), ~replace_na(.x, 100))) %>% 
+        mutate(on_top = abs(lag_value) < .05 | abs(lead_value) < .05,
+               new_set = on_top & (value - lag_v) > .25,
+               new_set = new_set | lag(new_set), 
+               new_set = ifelse(is.na(new_set), FALSE, new_set)) %>% 
+        group_by(on_top, new_set) %>% 
+        mutate(set_num = 1:n(),
+               on_top = on_top & set_num == min(set_num)) 
+        }) %>% 
+  bind_rows
+
+
+ps <- levels(player_value_summary_long$position_group2) %>% 
+  map(function(p_group){
+    
+    p_df2 <- p_df %>% 
+      filter(position_group2 == p_group) 
+    
+    p_max <- max(p_df2$value) + .5
+    p_max_label <- round(max(p_df2$value), 0)
+    p_min <- min(p_df2$value) - .5
+    p_min_label <- round(min(p_df2$value), 0)
+    
+    p_df2 %>% 
+      ggplot(
+        aes(
+          x = value,
+          y = reorder(position_group7, -pos_rank)
+        )
+      ) +
+      geom_point(data = . %>% filter(!on_top),
+                 aes(
+                   color = team
+                 ),
+                 shape = 21, size = rel(1.5), stroke = rel(1.5),
+                 fill = "white"
+      ) +
+      geom_point(data = . %>% filter(on_top),
+                 aes(
+                   color = team
+                 ),
+                 position = position_nudge(y = .125),
+                 shape = 21, size = rel(1.5), stroke = rel(1.5),
+                 fill = "white"
+      ) +
+      ggrepel::geom_label_repel(
+        data = . %>% filter(on_top),
+        aes(
+        label = abbreviation,
+        color = team
+      ),
+      position = position_nudge(y = .25, x = .5), show.legend = FALSE) +
+      ggrepel::geom_label_repel(
+        data = . %>% filter(!on_top),
+        aes(
+        label = abbreviation,
+        color = team
+      ), show.legend = FALSE) +
+      scale_color_manual(values = colors_primary) + 
+      scale_x_continuous(expand = c(0.01,0),
+                         limits = c(p_min, p_max),
+                         breaks = seq(p_min_label, p_max_label, by = 1)
+      ) + 
+      ggforce::facet_col(vars(position_group2), 
+                         space = 'free', scales = "free") + 
+      labs(x = "fWAR") + 
+      plot_theme() + 
+      theme(axis.title.y = element_blank(),
+            axis.title.x = element_text(face = 'bold.italic'),
+            panel.grid.major.x = element_blank(),
+            panel.grid.minor.x = element_blank(),
+            panel.grid.major.y = element_line(linetype = "dotted", color = "#A4A4A4", size = .4)
+      )    
+    
+  }) %>% 
+  set_names(levels(player_value_summary_long$position_group2))
+
+
+p <- patchwork::wrap_plots(ps$Hitting + theme(legend.position = "none", 
+                                         axis.title.x = element_blank()
+                                         ),
+                      ps$Pitching + labs(caption = paste0("Games thru", games_thru)) + 
+                        theme(plot.title = element_blank()),
+                      ncol = 1, 
+                      heights = c(.7, .3)
+                      )
+
+  plot(p)  
+  cat("\n\n\n")
+})
+
+```
+
+***********
+  
