@@ -45,6 +45,25 @@ divs <- tm_colors$division %>% unique
 
 ```{r, results = 'asis', fig.align='center', fig.height=10, fig.width=8.5}
 
+hitting_df <- player_value_summary_long %>% 
+  filter(stat_cat == "WAR") %>% 
+  filter(position_group2 == "Hitting")
+
+hitting_df <- player_value_summary_long %>% 
+  filter(stat_cat == "WAR") %>% 
+  filter(position_group2 == "Hitting")
+hitting_p_max <- max(hitting_df$value) + .5
+hitting_p_max_label <- round(max(hitting_df$value), 0)
+hitting_p_min <- min(hitting_df$value) - .5
+hitting_p_min_label <- round(min(hitting_df$value), 0)
+pitching_df <- player_value_summary_long %>% 
+  filter(stat_cat == "WAR") %>% 
+  filter(position_group2 == "Pitching")
+pitching_p_max <- max(pitching_df$value) + .5
+pitching_p_max_label <- round(max(pitching_df$value), 0)
+pitching_p_min <- min(pitching_df$value) - .5
+pitching_p_min_label <- round(min(pitching_df$value), 0)
+
 walk(divs, function(division_in){
   
   cat(division_in, "\n")
@@ -99,16 +118,19 @@ p_df <- p_df1 %>%
 
 ps <- levels(player_value_summary_long$position_group2) %>% 
   map(function(p_group){
-    
-    p_df2 <- p_df %>% 
-      filter(position_group2 == p_group) 
-    
-    p_max <- max(p_df2$value) + .5
-    p_max_label <- round(max(p_df2$value), 0)
-    p_min <- min(p_df2$value) - .5
-    p_min_label <- round(min(p_df2$value), 0)
-    
-    p_df2 %>% 
+
+if(p_group == "Pitching"){
+p_max <- pitching_p_max
+p_max_label <- pitching_p_max_label
+p_min <- pitching_p_min
+p_min_label <- pitching_p_min_label
+} else{
+p_max <- hitting_p_max
+p_max_label <- hitting_p_max_label
+p_min <- hitting_p_min
+p_min_label <- hitting_p_min_label
+}
+  p_df %>% 
       ggplot(
         aes(
           x = value,
@@ -166,7 +188,7 @@ ps <- levels(player_value_summary_long$position_group2) %>%
 p <- patchwork::wrap_plots(ps$Hitting + theme(legend.position = "none", 
                                          axis.title.x = element_blank()
                                          ),
-                      ps$Pitching + labs(caption = paste0("Games thru", games_thru)) + 
+                      ps$Pitching + labs(caption = paste0("Games thru ", games_thru)) + 
                         theme(plot.title = element_blank()),
                       ncol = 1, 
                       heights = c(.7, .3)
