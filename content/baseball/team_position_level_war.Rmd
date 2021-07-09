@@ -131,6 +131,7 @@ p_min <- hitting_p_min
 p_min_label <- hitting_p_min_label
 }
   p_df %>% 
+      filter(position_group2 == p_group) %>% 
       ggplot(
         aes(
           x = value,
