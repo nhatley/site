@@ -1,0 +1,75 @@
+---
+title: "Starting Pitching Innings in 2021 Playoffs"
+author: "Nick Hatley"
+date: "2021-11-01"
+output:
+  blogdown::html_page
+categories: ["R"]
+slug: starters_playoff_innings
+tags: ["baseball", "pitching", "playoffs"]
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(warning =  FALSE)
+knitr::opts_chunk$set(message = FALSE)
+options(knitr.table.format = "html")
+```
+
+
+```{r get librarys, function and data}
+library(tidyverse)
+library(kableExtra)
+library(knitr)
+
+mlb_db_dir = "~/Dropbox/mlb/"
+source(paste0(mlb_db_dir, "code/functions/plot_theme.R"))
+```
+
+For all the talk about how starting pitching isn't going long in games in the 2021 World Series, the data shows this is more of a *playoff* general story than a *World Series* story.
+ 
+***********
+  
+```{r, fig.align='center', fig.width=7, fig.height=4.5}
+p_starter_innings_sum <- read_rds(paste0(mlb_db_dir, "output/for_website/playoff_sp_innings.rds"))
+tm_colors_df <- read_rds(paste0(mlb_db_dir, "reports/logos/mlb_colors.rds"))
+
+tm_colors_primary <- tm_colors_df %>% 
+  filter(color_type == 'primary') %>% 
+  pull(color_hex_code) %>% 
+  set_names(unique(tm_colors_df$team_abbrev2))
+
+tm_colors_secondary <- tm_colors_df %>% 
+  filter(color_type == 'secondary') %>% 
+  pull(color_hex_code) %>% 
+  set_names(unique(tm_colors_df$team_abbrev2))
+
+
+p_starter_innings_sum %>%   
+  filter(stat_calc == 'mean') %>%  
+  filter(stat_type_label == "Avgerage Innings from Starting Pitcher") %>% 
+  ggplot(aes(
+    x = value, 
+    y = reorder(team, value)
+  )) + 
+  geom_col(aes(color = team, fill = team)) +
+  geom_label(data = . %>% filter(stat_type_label == "Avgerage Innings from Starting Pitcher"), 
+             aes(x = value - .1, label = round(value, 1))) + 
+  scale_color_manual(values = tm_colors_secondary) +
+  scale_fill_manual(values = tm_colors_primary) + 
+  ggforce::facet_col(vars(stat_type_label), scales = 'free_x') + 
+  scale_x_continuous(expand = c(0, 0)) + 
+  plot_theme() + 
+  labs(title = "**WS Teams are *NOT* unique from playoff teams overall in getting<br>innings from their bullpen**", 
+       caption = "Among teams that played in DS...") + 
+  theme(legend.position = 'none', 
+        plot.title = ggtext::element_markdown(),
+        axis.title = element_blank(),
+        panel.grid.major.y = element_line(linetype = "dotted", color = "#A4A4A4", size = .4),
+        panel.grid.minor = element_blank(),
+        axis.ticks.x = element_blank()
+  ) 
+
+```
+  
+***********
+  

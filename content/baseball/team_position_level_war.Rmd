@@ -154,14 +154,6 @@ p_min_label <- hitting_p_min_label
                  fill = "white"
       ) +
       ggrepel::geom_label_repel(
-        data = . %>% filter(on_top),
-        aes(
-        label = abbreviation,
-        color = team
-      ),
-      position = position_nudge(y = .25, x = .5), show.legend = FALSE) +
-      ggrepel::geom_label_repel(
-        data = . %>% filter(!on_top),
         aes(
         label = abbreviation,
         color = team
